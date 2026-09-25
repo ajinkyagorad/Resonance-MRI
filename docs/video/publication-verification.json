@@ -1,0 +1,79 @@
+{
+  "video_url": "https://www.youtube.com/watch?v=jU3K3tr13xE",
+  "privacy": "unlisted",
+  "youtube_processing": "succeeded",
+  "youtube_definition": "hd",
+  "youtube_duration": "PT12M44S",
+  "site_url": "https://nebulytic.com/apps/resonance-mri/#full-lesson",
+  "cloudflare_version": "73dda549-7315-47bc-94f4-1103d2516157",
+  "website_source_commit": "1c52dcd",
+  "site_checks": [
+    {
+      "path": "apps/resonance-mri/index.html",
+      "status": 200,
+      "matches_build": true,
+      "sha256": "cb84bdf381db6eac8c2caddb2c6f40ca983f4d46a5e54f1449cce43ce40cf156"
+    },
+    {
+      "path": "apps/resonance-mri/resonance-video.js",
+      "status": 200,
+      "matches_build": true,
+      "sha256": "020a07b67efd4d8c4ef81159689311ceecb65f572579d8c33681250a5cdf7782"
+    },
+    {
+      "path": "apps/resonance-mri/resonance-mri.css",
+      "status": 200,
+      "matches_build": true,
+      "sha256": "2efaa04d599cff3b186bae11939b8ad8a37c7277273384207bf697ae39ba2413"
+    },
+    {
+      "path": "apps/resonance-mri/privacy.html",
+      "status": 200,
+      "matches_build": true,
+      "sha256": "7ed246b1402a89bdd07074a2c9b5107bde21d004e8df5efa71fba5d0a672be54"
+    },
+    {
+      "path": "apps/resonance-mri/img/full-lesson.jpg",
+      "status": 200,
+      "matches_build": true,
+      "sha256": "d7622f397aad9576dee2186bc917cd4f9a6a78ac5afc8ac89b157b14ed987eab"
+    },
+    {
+      "path": "index.html",
+      "status": 200,
+      "matches_build": true,
+      "sha256": "97e2de90b87111ce9911afe26c00eb0ed9f52cb209c7cb1eb97507cdabb23535"
+    },
+    {
+      "path": "webapps.html",
+      "status": 200,
+      "matches_build": true,
+      "sha256": "7ec983885b5f7370c3aa2f4121848c07c1bae854519666657b6a3c0aba76a670"
+    },
+    {
+      "path": "sitemap.xml",
+      "status": 200,
+      "matches_build": true,
+      "sha256": "d72417ee715495280b3492531fc15ab7f1d7b1d9ed68bc6f5c5fe28fad7be90e"
+    },
+    {
+      "path": "apps/planetary-vitals/index.html",
+      "status": 200,
+      "matches_build": true,
+      "sha256": "8ed5d43630cd0f7fe865745fe21ee80c8579bd892723e23e9176827d4df83565"
+    },
+    {
+      "path": "apps/planetary-vitals/privacy.html",
+      "status": 200,
+      "matches_build": true,
+      "sha256": "3dec98080617de80b499b032fdd1693027532b863f9eb92e480ef70e61bf1ee5"
+    },
+    {
+      "path": "apps/mechanarium/index.html",
+      "status": 200,
+      "matches_build": true,
+      "sha256": "6f56b3242e380e542b02307f07d51eb3a4e3935a8cd32c0d33a2aa0f2274e222"
+    }
+  ],
+  "method": "HTTP byte-for-byte checks against the server build; no laptop browser automation"
+}
