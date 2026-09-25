@@ -1,0 +1,1321 @@
+{
+  "version": 10,
+  "voices": [
+    "am_michael",
+    "bm_george"
+  ],
+  "speed": 1.12,
+  "notes": "One sentence per cue (0.8.4: an introduction of the scanner's parts and of every view before the physics; each sentence names only what is on screen and points at it). sim: hold | span [from, to] at speed carrier/pulse/relax | cut to | strobe rows/slices. Time expressions: event, event@fraction (of the segment), event+N{c,us,ms}. {placeholders} come from lesson-derived.json (computed by Tools/simcore). [display|spoken]: the subtitle shows display, the voice says spoken. A cue with 'generic' is spoken with the generic text when the protocol is not the default.",
+  "steps": [
+    {
+      "step": 1,
+      "title": "The scanner",
+      "cues": [
+        {
+          "id": "1.1",
+          "text": "This is an MRI scanner: it images inside the body with magnetism and radio waves.",
+          "refs": [
+            "scanner"
+          ],
+          "sim": {
+            "hold": "0"
+          }
+        },
+        {
+          "id": "1.2",
+          "text": "These silver windings form the main magnet, carrying a steady current of {I_B0} amperes.",
+          "refs": [
+            "coil.b0"
+          ],
+          "generic": "These silver windings form the main magnet, carrying a steady current."
+        },
+        {
+          "id": "1.3",
+          "text": "Their field, [B₀|B zero], runs along the bore at one tesla; these lines trace it.",
+          "refs": [
+            "field.b"
+          ],
+          "generic": "Their field, [B₀|B zero], runs along the bore; these lines trace it."
+        },
+        {
+          "id": "1.4",
+          "text": "These arrows give the directions: z, in violet, runs along the bore and the field.",
+          "refs": [
+            "axis.z"
+          ]
+        },
+        {
+          "id": "1.5",
+          "text": "y, in orange, points up; x, in cyan, points across the bore.",
+          "refs": [
+            "axis.y",
+            "axis.x"
+          ]
+        },
+        {
+          "id": "1.6",
+          "text": "Inside the magnet sit three gradient coils; each makes the field change along one direction.",
+          "refs": [
+            "gradients"
+          ]
+        },
+        {
+          "id": "1.7",
+          "text": "Each has its direction's colour: the x coils cyan, y orange, z violet.",
+          "refs": [
+            "gradients"
+          ]
+        },
+        {
+          "id": "1.8",
+          "text": "The coral RF coil transmits; the smaller gold loop receives the tissue’s signal.",
+          "refs": [
+            "coil.rf",
+            "coil.rx"
+          ]
+        },
+        {
+          "id": "1.9",
+          "text": "A cable carries the receive coil’s voltage into the sampling and filtering electronics.",
+          "refs": [
+            "coil.rx",
+            "rx"
+          ]
+        },
+        {
+          "id": "1.10",
+          "text": "A hand lies in the bore; the scanner will image it, slice by slice.",
+          "refs": [
+            "hand"
+          ]
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "title": "From one spin to spatial encoding",
+      "cues": [
+        {
+          "id": "2.14",
+          "text": "Start with one hydrogen nucleus: its spin gives it a magnetic moment.",
+          "refs": [
+            "spins.all"
+          ],
+          "demo": "single",
+          "sim": {
+            "hold": "0"
+          }
+        },
+        {
+          "id": "2.15",
+          "text": "This arrow shows the spin state’s expectation value; its transverse component precesses around the field.",
+          "refs": [
+            "spins.all"
+          ],
+          "demo": "single",
+          "sim": {
+            "hold": "0"
+          }
+        },
+        {
+          "id": "2.16",
+          "text": "The local magnetic field sets the Larmor frequency; here we slow that precession.",
+          "refs": [
+            "spins.all"
+          ],
+          "demo": "single",
+          "sim": {
+            "hold": "0"
+          }
+        },
+        {
+          "id": "2.17",
+          "text": "A resonant transverse RF field rotates the spin state, changing the moment’s direction.",
+          "refs": [
+            "spins.all"
+          ],
+          "demo": "singleRF",
+          "sim": {
+            "hold": "0"
+          }
+        },
+        {
+          "id": "2.18",
+          "text": "Now fill this three-dimensional grid with identical small samples of hydrogen spins.",
+          "refs": [
+            "spins.all"
+          ],
+          "demo": "uniform",
+          "sim": {
+            "hold": "0"
+          }
+        },
+        {
+          "id": "2.19",
+          "text": "Each sample sees the same ideal field and pulse, so all net moments tip together.",
+          "refs": [
+            "spins.all"
+          ],
+          "demo": "uniform",
+          "sim": {
+            "hold": "0"
+          }
+        },
+        {
+          "id": "2.20",
+          "text": "After excitation, longitudinal magnetization recovers through energy exchange with the molecular surroundings.",
+          "refs": [
+            "spins.all"
+          ],
+          "demo": "t1",
+          "sim": {
+            "hold": "0"
+          }
+        },
+        {
+          "id": "2.21",
+          "text": "T one is the time to recover about sixty-three percent of the missing longitudinal magnetization.",
+          "refs": [
+            "spins.all"
+          ],
+          "demo": "t1",
+          "sim": {
+            "hold": "0"
+          }
+        },
+        {
+          "id": "2.22",
+          "text": "Transverse coherence also decays: T two leaves about thirty-seven percent after one time constant.",
+          "refs": [
+            "spins.all"
+          ],
+          "demo": "t2",
+          "sim": {
+            "hold": "0"
+          }
+        },
+        {
+          "id": "2.23",
+          "text": "Now two materials have different relaxation times and local frequency offsets.",
+          "refs": [
+            "spins.all"
+          ],
+          "demo": "mixture",
+          "sim": {
+            "hold": "0"
+          }
+        },
+        {
+          "id": "2.24",
+          "text": "Molecular motion and fluctuating magnetic interactions influence relaxation; shielding and susceptibility affect local resonance.",
+          "refs": [
+            "spins.all"
+          ],
+          "demo": "mixture",
+          "sim": {
+            "hold": "0"
+          }
+        },
+        {
+          "id": "2.25",
+          "text": "Electrical permittivity influences RF-field distribution; it alone does not determine these relaxation times.",
+          "refs": [
+            "spins.all"
+          ],
+          "demo": "mixture",
+          "sim": {
+            "hold": "0"
+          }
+        },
+        {
+          "id": "2.26",
+          "text": "During RF excitation, G z makes resonance frequency vary with z across this volume.",
+          "refs": [
+            "spins.all"
+          ],
+          "demo": "slice",
+          "sim": {
+            "hold": "0"
+          }
+        },
+        {
+          "id": "2.27",
+          "text": "The RF frequency band excites a slab; these outer moments remain longitudinal.",
+          "refs": [
+            "spins.all"
+          ],
+          "demo": "slice",
+          "sim": {
+            "hold": "0"
+          }
+        },
+        {
+          "id": "2.28",
+          "text": "During readout, G x makes precession frequency vary with x throughout the excited slice.",
+          "refs": [
+            "spins.all"
+          ],
+          "demo": "gx",
+          "sim": {
+            "hold": "0"
+          }
+        },
+        {
+          "id": "2.29",
+          "text": "Positions sharing x contribute at the same frequency, so this measurement alone combines their contributions.",
+          "refs": [
+            "spins.all"
+          ],
+          "demo": "gx",
+          "sim": {
+            "hold": "0"
+          }
+        },
+        {
+          "id": "2.30",
+          "text": "A brief G y pulse accumulates different phases at different y positions.",
+          "refs": [
+            "spins.all"
+          ],
+          "demo": "gy",
+          "sim": {
+            "hold": "0"
+          }
+        },
+        {
+          "id": "2.31",
+          "text": "When G y ends, its frequency shift ends, while the accumulated phase differences remain.",
+          "refs": [
+            "spins.all"
+          ],
+          "demo": "gyHold",
+          "sim": {
+            "hold": "0"
+          }
+        },
+        {
+          "id": "2.32",
+          "text": "Follow these two samples: they share x but occupy different y positions.",
+          "refs": [
+            "spins.all"
+          ],
+          "demo": "pair0",
+          "sim": {
+            "hold": "0"
+          }
+        },
+        {
+          "id": "2.33",
+          "text": "Their first measurement adds both contributions: point eight plus point three gives one point one.",
+          "refs": [
+            "spins.all"
+          ],
+          "demo": "pair0",
+          "sim": {
+            "hold": "0"
+          }
+        },
+        {
+          "id": "2.34",
+          "text": "A second phase encoding makes their relative phase half a turn; their contributions now subtract.",
+          "refs": [
+            "spins.all"
+          ],
+          "demo": "pair1",
+          "sim": {
+            "hold": "0"
+          }
+        },
+        {
+          "id": "2.35",
+          "text": "Combining those two measurements recovers each contribution; many y positions require more independent encodings.",
+          "refs": [
+            "spins.all"
+          ],
+          "demo": "recover",
+          "sim": {
+            "hold": "0"
+          }
+        },
+        {
+          "id": "2.36",
+          "text": "Each k-space sample combines the excited slice; a complete set reconstructs the spatial voxel values.",
+          "refs": [
+            "spins.all"
+          ],
+          "demo": "recover",
+          "sim": {
+            "hold": "0"
+          }
+        },
+        {
+          "id": "2.1",
+          "text": "This small white box marks a block of the hand, five by five by ten millimetres.",
+          "refs": [
+            "region"
+          ],
+          "sim": {
+            "hold": "0"
+          }
+        },
+        {
+          "id": "2.2",
+          "text": "Here that hand sample fills the grid; Sync can match its orientation to the scanner.",
+          "refs": [
+            "cube"
+          ]
+        },
+        {
+          "id": "2.3",
+          "text": "Use Sync to match the hand’s orientation, or unlock it and turn the tissue independently.",
+          "refs": [
+            "cube",
+            "scanner"
+          ]
+        },
+        {
+          "id": "2.4",
+          "text": "This three-dimensional grid has six by six by eight sampled tissue moments.",
+          "refs": [
+            "spins.all"
+          ]
+        },
+        {
+          "id": "2.5",
+          "text": "Each arrow initially shows the net magnetization of a small tissue sample.",
+          "refs": [
+            "spins.all"
+          ]
+        },
+        {
+          "id": "2.6",
+          "text": "The M control switches between net magnetization and an illustrative microscopic moment.",
+          "refs": [
+            "spins.all"
+          ]
+        },
+        {
+          "id": "2.7",
+          "text": "The Phase control colours the moments by their transverse phase.",
+          "refs": [
+            "spins.all"
+          ]
+        },
+        {
+          "id": "2.8",
+          "text": "The arrows change direction and length as the sample’s magnetization changes.",
+          "refs": [
+            "spins.all"
+          ]
+        },
+        {
+          "id": "2.9",
+          "text": "Select a moment to follow that sample in the enlarged views.",
+          "refs": [
+            "closeup"
+          ]
+        },
+        {
+          "id": "2.10",
+          "text": "This circle carries the colours: each colour is one direction across the field.",
+          "refs": [
+            "closeup.rot"
+          ]
+        },
+        {
+          "id": "2.11",
+          "text": "This plot will show each coil's current against time: the pulse sequence.",
+          "refs": [
+            "sequence"
+          ]
+        },
+        {
+          "id": "2.12",
+          "text": "This plot will show the signal measured by the receive loop.",
+          "refs": [
+            "signal.trace",
+            "coil.rx"
+          ]
+        },
+        {
+          "id": "2.13",
+          "text": "And here the measurements will collect and become an image.",
+          "refs": [
+            "kspace",
+            "image"
+          ]
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "title": "Resonance",
+      "cues": [
+        {
+          "id": "3.1",
+          "text": "In this field, protons precess at {f0} megahertz: the Larmor frequency.",
+          "refs": [
+            "closeup.lab",
+            "spins.all"
+          ],
+          "generic": "In this field, protons precess at the Larmor frequency, set by the field.",
+          "sim": {
+            "span": [
+              "hard1.pre.start",
+              "hard1.pre.start+3c"
+            ],
+            "speed": "carrier"
+          }
+        },
+        {
+          "id": "3.2",
+          "text": "Their turning is shown slowed here, to one turn every two seconds.",
+          "refs": [
+            "closeup.lab"
+          ]
+        },
+        {
+          "id": "3.3",
+          "text": "Now the RF coil's current makes a weak field, [B₁|B one], turning at that same frequency.",
+          "refs": [
+            "field.b1",
+            "coil.rf"
+          ],
+          "sim": {
+            "span": [
+              "hard1.rf.start",
+              "hard1.rf.start+3c"
+            ],
+            "speed": "carrier"
+          }
+        },
+        {
+          "id": "3.4",
+          "text": "These coral arrows show [B₁|B one] filling the whole coil.",
+          "refs": [
+            "field.b1"
+          ],
+          "sim": {
+            "span": [
+              "",
+              "hard1.rf.start+5c"
+            ],
+            "speed": "carrier"
+          }
+        },
+        {
+          "id": "3.5",
+          "text": "The second view turns with that field, and time runs ten thousand times slower.",
+          "refs": [
+            "closeup.rot",
+            "cube.b1"
+          ]
+        },
+        {
+          "id": "3.6",
+          "text": "Near resonance, the rotating drive steadily tips the tissue’s net magnetization.",
+          "refs": [
+            "spins.all"
+          ],
+          "sim": {
+            "span": [
+              "",
+              "hard1.rf@0.5"
+            ],
+            "speed": "pulse"
+          }
+        },
+        {
+          "id": "3.7",
+          "text": "The tipping adds up, though this field is {ratio} times weaker than the magnet's.",
+          "refs": [
+            "closeup.rot",
+            "cube.b1"
+          ],
+          "generic": "The tipping adds up, though this field is far weaker than the magnet's.",
+          "sim": {
+            "span": [
+              "",
+              "hard1.rf@0.95"
+            ],
+            "speed": "pulse"
+          }
+        },
+        {
+          "id": "3.8",
+          "text": "Transverse magnetization is now strong, with matching phases across the excited tissue.",
+          "refs": [
+            "spins.all"
+          ],
+          "sim": {
+            "span": [
+              "",
+              "hard1.rf.end"
+            ],
+            "speed": "pulse"
+          }
+        }
+      ]
+    },
+    {
+      "step": 4,
+      "title": "Signal",
+      "cues": [
+        {
+          "id": "4.1",
+          "text": "In the scanner, the tipped protons sweep round {f0} million times a second.",
+          "refs": [
+            "spins.all"
+          ],
+          "generic": "In the scanner, the tipped protons sweep round at the Larmor frequency.",
+          "sim": {
+            "span": [
+              "hard1.rf.end",
+              "hard1.rf.end+3c"
+            ],
+            "speed": "carrier"
+          }
+        },
+        {
+          "id": "4.2",
+          "text": "Changing magnetic flux induces a voltage in the receive loop.",
+          "refs": [
+            "coil.rx"
+          ],
+          "sim": {
+            "span": [
+              "",
+              "hard1.rf.end+5c"
+            ],
+            "speed": "carrier"
+          }
+        },
+        {
+          "id": "4.3",
+          "text": "The receiver samples that voltage directly, 122.88 million times a second.",
+          "refs": [
+            "rx.adc"
+          ],
+          "sim": {
+            "span": [
+              "",
+              "hard1.rf.end+50us"
+            ],
+            "speed": "pulse"
+          }
+        },
+        {
+          "id": "4.4",
+          "text": "It multiplies each sample by a cosine and a sine at the RF frequency.",
+          "refs": [
+            "rx.mix"
+          ]
+        },
+        {
+          "id": "4.5",
+          "text": "Filters keep the slow part: {rx_rate} thousand number pairs a second.",
+          "refs": [
+            "rx.filter"
+          ]
+        },
+        {
+          "id": "4.6",
+          "text": "Each pair is this arrow, I and Q: the tipped magnetization as the coil sees it.",
+          "refs": [
+            "signal"
+          ]
+        },
+        {
+          "id": "4.7",
+          "text": "Its colour is its phase, the same colours as the protons.",
+          "refs": [
+            "signal"
+          ]
+        },
+        {
+          "id": "4.8",
+          "text": "Now time runs a hundred times faster.",
+          "refs": [
+            "signal"
+          ],
+          "sim": {
+            "span": [
+              "",
+              "hard1.rf.end+3ms"
+            ],
+            "speed": "relax"
+          }
+        },
+        {
+          "id": "4.9",
+          "text": "Each pair joins this line in the signal plot, drawn against time.",
+          "refs": [
+            "signal.trace"
+          ],
+          "sim": {
+            "span": [
+              "",
+              "hard1.rf.end+12ms"
+            ],
+            "speed": "relax"
+          }
+        },
+        {
+          "id": "4.10",
+          "text": "The signal shrinks: across the hand the field differs by millionths, so protons drift apart.",
+          "refs": [
+            "signal.trace",
+            "hand.glow"
+          ],
+          "sim": {
+            "span": [
+              "",
+              "hard1.rf.end+25ms"
+            ],
+            "speed": "relax"
+          }
+        },
+        {
+          "id": "4.11",
+          "text": "Each proton's tip fades, and its alignment along the field regrows.",
+          "refs": [
+            "spins.all"
+          ],
+          "sim": {
+            "span": [
+              "",
+              "hard1.rf.end+45ms"
+            ],
+            "speed": "relax"
+          }
+        },
+        {
+          "id": "4.12",
+          "text": "Muscle's tipped part fades within tens of milliseconds.",
+          "refs": [
+            "spins.kind:muscle"
+          ],
+          "sim": {
+            "span": [
+              "",
+              "hard1.rf.end+70ms"
+            ],
+            "speed": "relax"
+          }
+        },
+        {
+          "id": "4.13",
+          "text": "Fat's fades more slowly, and fat's protons turn slightly slower, so their colour drifts.",
+          "refs": [
+            "spins.kind:fat"
+          ],
+          "sim": {
+            "span": [
+              "",
+              "hard1.fid.end"
+            ],
+            "speed": "relax"
+          }
+        }
+      ]
+    },
+    {
+      "step": 5,
+      "title": "Gradient",
+      "cues": [
+        {
+          "id": "5.1",
+          "text": "After a pause, the protons are back along the field and tipped again.",
+          "refs": [
+            "spins.all"
+          ],
+          "sim": {
+            "cut": "hard2.rf.end"
+          }
+        },
+        {
+          "id": "5.2",
+          "text": "These are the z gradient coils, in violet.",
+          "refs": [
+            "coil.gz"
+          ]
+        },
+        {
+          "id": "5.3",
+          "text": "Their current appears in the pulse sequence, on the Gz row.",
+          "refs": [
+            "sequence"
+          ]
+        },
+        {
+          "id": "5.4",
+          "text": "It makes the field grow along the bore: the lines brighten where it is stronger.",
+          "refs": [
+            "field.b"
+          ],
+          "sim": {
+            "span": [
+              "",
+              "hard2.gzp.flat@0.3"
+            ],
+            "speed": "pulse"
+          }
+        },
+        {
+          "id": "5.5",
+          "text": "In the block, this violet arrow shows the field rising along z.",
+          "refs": [
+            "cube.field"
+          ],
+          "sim": {
+            "span": [
+              "",
+              "hard2.gzp.flat@0.5"
+            ],
+            "speed": "pulse"
+          }
+        },
+        {
+          "id": "5.6",
+          "text": "Each plane now precesses at its own frequency, so the colours twist along z.",
+          "refs": [
+            "spins.all"
+          ],
+          "sim": {
+            "span": [
+              "",
+              "hard2.gzp.end"
+            ],
+            "speed": "pulse"
+          }
+        },
+        {
+          "id": "5.7",
+          "text": "When the current stops, every plane shares one frequency again, and the twist stays.",
+          "refs": [
+            "spins.all"
+          ],
+          "sim": {
+            "span": [
+              "",
+              "hard2.gap.end"
+            ],
+            "speed": "pulse"
+          }
+        },
+        {
+          "id": "5.8",
+          "text": "With phases fanned out, the protons add up to almost nothing: the signal vanishes.",
+          "refs": [
+            "signal"
+          ]
+        },
+        {
+          "id": "5.9",
+          "text": "Reversing the current unwinds the twist.",
+          "refs": [
+            "coil.gz"
+          ],
+          "sim": {
+            "span": [
+              "",
+              "hard2.gzm.end"
+            ],
+            "speed": "pulse"
+          }
+        },
+        {
+          "id": "5.10",
+          "text": "The colours line up again, and the signal returns: an echo.",
+          "refs": [
+            "signal",
+            "spins.all"
+          ]
+        }
+      ]
+    },
+    {
+      "step": 6,
+      "title": "Slice",
+      "cues": [
+        {
+          "id": "6.1",
+          "text": "After another pause, the z coils carry current again.",
+          "refs": [
+            "coil.gz"
+          ],
+          "sim": {
+            "cut": "s0.r0.ssup.end"
+          }
+        },
+        {
+          "id": "6.2",
+          "text": "Each plane's frequency now rises steadily along the bore.",
+          "refs": [
+            "field.b",
+            "cube.field"
+          ]
+        },
+        {
+          "id": "6.3",
+          "text": "With the z gradient active, this pulse’s centre frequency targets the middle plane.",
+          "refs": [
+            "coil.rf",
+            "coil.gz"
+          ],
+          "generic": "With the z gradient active, this pulse’s centre frequency targets one plane.",
+          "sim": {
+            "span": [
+              "",
+              "s0.r0.ss@0.25"
+            ],
+            "speed": "pulse"
+          }
+        },
+        {
+          "id": "6.4",
+          "text": "Its field reaches the whole volume at once.",
+          "refs": [
+            "field.b1"
+          ],
+          "sim": {
+            "span": [
+              "",
+              "s0.r0.ss@0.4"
+            ],
+            "speed": "pulse"
+          }
+        },
+        {
+          "id": "6.5",
+          "text": "Only protons in a {BW}-hertz band stay in step, so only their tipping adds up.",
+          "refs": [
+            "spins.band"
+          ],
+          "generic": "Only protons in a narrow frequency band stay in step, so only their tipping adds up.",
+          "sim": {
+            "span": [
+              "",
+              "s0.r0.ss@0.62"
+            ],
+            "speed": "pulse"
+          }
+        },
+        {
+          "id": "6.6",
+          "text": "Elsewhere the field slips past the protons, and its pushes cancel: they stay dim.",
+          "refs": [
+            "spins.off"
+          ],
+          "sim": {
+            "span": [
+              "",
+              "s0.r0.ss.end"
+            ],
+            "speed": "pulse"
+          }
+        },
+        {
+          "id": "6.7",
+          "text": "The tipped protons form a slab {dz} millimetres thick.",
+          "refs": [
+            "spins.band",
+            "hand.glow"
+          ],
+          "generic": "The tipped protons form one slab."
+        },
+        {
+          "id": "6.8",
+          "text": "Its thickness is the pulse's bandwidth divided by how fast frequency changes along z.",
+          "refs": [
+            "spins.band"
+          ]
+        },
+        {
+          "id": "6.9",
+          "text": "Through the slab's thickness, their colours have drifted apart.",
+          "refs": [
+            "spins.band"
+          ]
+        },
+        {
+          "id": "6.10",
+          "text": "A reversed z pulse, half as long, brings them back in line.",
+          "refs": [
+            "coil.gz"
+          ],
+          "sim": {
+            "span": [
+              "",
+              "s0.r0.reph.end"
+            ],
+            "speed": "pulse"
+          }
+        }
+      ]
+    },
+    {
+      "step": 7,
+      "title": "Readout",
+      "cues": [
+        {
+          "id": "7.1",
+          "text": "These are the x gradient coils, in cyan.",
+          "refs": [
+            "coil.gx"
+          ],
+          "sim": {
+            "span": [
+              "s0.r0.reph.end",
+              "s0.r0.pe.end"
+            ],
+            "speed": "pulse"
+          }
+        },
+        {
+          "id": "7.2",
+          "text": "A short reversed pulse first winds the slab's colours along x.",
+          "refs": [
+            "spins.band",
+            "cube.field"
+          ],
+          "sim": {
+            "span": [
+              "",
+              "s0.r0.pre.end"
+            ],
+            "speed": "pulse"
+          }
+        },
+        {
+          "id": "7.3",
+          "text": "Then the current flips, and the receiver starts sampling.",
+          "refs": [
+            "coil.gx"
+          ],
+          "sim": {
+            "span": [
+              "",
+              "s0.r0.adc.start+0.1ms"
+            ],
+            "speed": "pulse"
+          }
+        },
+        {
+          "id": "7.4",
+          "text": "The field now rises along x, as the cyan arrow shows.",
+          "refs": [
+            "cube.field",
+            "field.b"
+          ],
+          "sim": {
+            "span": [
+              "",
+              "s0.r0.adc.start+0.4ms"
+            ],
+            "speed": "pulse"
+          }
+        },
+        {
+          "id": "7.5",
+          "text": "So protons at each x precess at their own rate, unwinding the twist.",
+          "refs": [
+            "spins.band"
+          ],
+          "sim": {
+            "span": [
+              "",
+              "s0.r0.adc.start+0.8ms"
+            ],
+            "speed": "pulse"
+          }
+        },
+        {
+          "id": "7.6",
+          "text": "Halfway, the twist is undone: one colour again, and the signal peaks.",
+          "refs": [
+            "signal.trace",
+            "spins.band"
+          ],
+          "sim": {
+            "span": [
+              "",
+              "s0.r0.echo"
+            ],
+            "speed": "pulse"
+          }
+        },
+        {
+          "id": "7.7",
+          "text": "Every sample is the sum over the whole slab at that instant.",
+          "refs": [
+            "spins.band",
+            "signal.trace"
+          ],
+          "sim": {
+            "span": [
+              "",
+              "s0.r0.echo+0.4ms"
+            ],
+            "speed": "pulse"
+          }
+        },
+        {
+          "id": "7.8",
+          "text": "Protons sharing an x but not a y turn alike, so this readout cannot separate them.",
+          "refs": [
+            "spins.col"
+          ],
+          "sim": {
+            "span": [
+              "",
+              "s0.r0.adc.end"
+            ],
+            "speed": "pulse"
+          }
+        },
+        {
+          "id": "7.9",
+          "text": "These samples fill one row of a table of measurements, called k-space.",
+          "refs": [
+            "kspace.row"
+          ]
+        },
+        {
+          "id": "7.10",
+          "text": "Along the row, kx counts the turns of x twist at each sample.",
+          "refs": [
+            "kspace.row"
+          ]
+        }
+      ]
+    },
+    {
+      "step": 8,
+      "title": "Phase",
+      "cues": [
+        {
+          "id": "8.1",
+          "text": "After a pause, the same slab is excited again.",
+          "refs": [
+            "spins.band"
+          ],
+          "sim": {
+            "cut": "s0.r1.reph.end"
+          }
+        },
+        {
+          "id": "8.2",
+          "text": "This time the y gradient coils, in orange, carry a pulse first.",
+          "refs": [
+            "coil.gy",
+            "sequence"
+          ],
+          "sim": {
+            "span": [
+              "",
+              "s0.r1.pe.up.end"
+            ],
+            "speed": "pulse"
+          }
+        },
+        {
+          "id": "8.3",
+          "text": "The field now rises along y.",
+          "refs": [
+            "cube.field",
+            "field.b"
+          ],
+          "sim": {
+            "span": [
+              "",
+              "s0.r1.pe.flat@0.5"
+            ],
+            "speed": "pulse"
+          }
+        },
+        {
+          "id": "8.4",
+          "text": "Protons higher up precess faster, and the colours twist along y.",
+          "refs": [
+            "spins.band"
+          ],
+          "sim": {
+            "span": [
+              "",
+              "s0.r1.pe.end"
+            ],
+            "speed": "pulse"
+          }
+        },
+        {
+          "id": "8.5",
+          "text": "When the current stops, the twist stays.",
+          "refs": [
+            "spins.band"
+          ]
+        },
+        {
+          "id": "8.6",
+          "text": "Its number of turns, ky, is set by the pulse's strength times its duration.",
+          "refs": [
+            "coil.gy",
+            "kspace"
+          ]
+        },
+        {
+          "id": "8.7",
+          "text": "The readout then runs as before.",
+          "refs": [
+            "coil.gx"
+          ],
+          "sim": {
+            "span": [
+              "",
+              "s0.r1.adc.start+0.2ms"
+            ],
+            "speed": "pulse"
+          }
+        },
+        {
+          "id": "8.8",
+          "text": "Each sample now adds up the slab's protons with the y twist included.",
+          "refs": [
+            "spins.band",
+            "signal.trace"
+          ],
+          "sim": {
+            "span": [
+              "",
+              "s0.r1.adc@0.8"
+            ],
+            "speed": "pulse"
+          }
+        },
+        {
+          "id": "8.9",
+          "text": "These samples fill a different row of k-space.",
+          "refs": [
+            "kspace.row"
+          ],
+          "sim": {
+            "span": [
+              "",
+              "s0.r1.adc.end"
+            ],
+            "speed": "pulse"
+          }
+        }
+      ]
+    },
+    {
+      "step": 9,
+      "title": "Image",
+      "strobe": "rows",
+      "cues": [
+        {
+          "id": "9.1",
+          "text": "The scanner repeats this, each time with a different y pulse.",
+          "refs": [
+            "spins.band"
+          ]
+        },
+        {
+          "id": "9.2",
+          "text": "Here each repetition is shown only at its echo.",
+          "refs": [
+            "spins.band"
+          ]
+        },
+        {
+          "id": "9.3",
+          "text": "More turns fill rows farther from the middle of k-space.",
+          "refs": [
+            "kspace"
+          ]
+        },
+        {
+          "id": "9.4",
+          "text": "The image forms where the slab is, sharpening as rows arrive.",
+          "refs": [
+            "image.slabs",
+            "image"
+          ]
+        },
+        {
+          "id": "9.5",
+          "text": "For each point, the samples are added again with that point's twists undone.",
+          "refs": [
+            "image"
+          ]
+        },
+        {
+          "id": "9.6",
+          "text": "Only that point's own signal adds up; the rest cancels.",
+          "refs": [
+            "image"
+          ]
+        },
+        {
+          "id": "9.7",
+          "text": "Rows with few turns carry the most signal; outer rows add the fine detail.",
+          "refs": [
+            "kspace"
+          ]
+        }
+      ]
+    },
+    {
+      "step": 10,
+      "title": "Volume",
+      "strobe": "slices",
+      "cues": [
+        {
+          "id": "10.1",
+          "text": "Shifting the RF frequency moves the matching plane along the bore.",
+          "refs": [
+            "hand.glow",
+            "image.slabs"
+          ]
+        },
+        {
+          "id": "10.2",
+          "text": "Each slab is excited and measured the same way.",
+          "refs": [
+            "image.slabs"
+          ]
+        },
+        {
+          "id": "10.3",
+          "text": "The complete stack covers the hand, with each slice added only after it is measured.",
+          "refs": [
+            "recon",
+            "image.slabs"
+          ]
+        },
+        {
+          "id": "10.4",
+          "text": "Its brightness comes from each tissue's protons and how fast they relax.",
+          "refs": [
+            "image"
+          ]
+        },
+        {
+          "id": "10.5",
+          "text": "Cortical bone and tendon lose their signal within a millisecond, so they stay dark.",
+          "refs": [
+            "image"
+          ]
+        },
+        {
+          "id": "10.6",
+          "text": "Every sample, row and image here came from the protons you watched.",
+          "refs": [
+            "spins.all",
+            "image"
+          ]
+        }
+      ]
+    }
+  ]
+}

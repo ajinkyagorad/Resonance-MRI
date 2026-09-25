@@ -1,0 +1,6 @@
+{
+  "magnet": {"conductor_mm": [1.44, 1.44], "r_mm": [220, 250], "packs": [{"z_centre_mm": 36.31, "length_mm": 33.26, "turns": 481.2}, {"z_centre_mm": 126.51, "length_mm": 49.26, "turns": 712.6}, {"z_centre_mm": 301.14, "length_mm": 132.18, "turns": 1912.3}], "mirrored": true, "b_iso_mT_per_A": 7.537020, "current_for_1T_A": 132.678},
+  "gradients": {"eta_x_mT_m_A": 0.154149, "eta_y_mT_m_A": 0.144666, "eta_z_mT_m_A": 0.148002},
+  "birdcage": {"b1_iso_uT_per_A": 9.8827},
+  "definition": "v4;0.0363073195,0.0332636648;0.1265089072,0.049255199;0.3011373731,0.1321808615;0.22,0.25,14467.592592592593;4x8;0.155,0.16,0.165;4,4,5;0.13,0.27,12,6;rx:0.055,0.05"
+}

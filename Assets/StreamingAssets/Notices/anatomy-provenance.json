@@ -1,0 +1,368 @@
+{
+  "source": "BodyParts3D 4.0, official LATEST archive downloaded 2026-09-22",
+  "license": "CC BY 4.0",
+  "attribution": "BodyParts3D, \u00a9 The Database Center for Life Science licensed under CC Attribution 4.0 International",
+  "source_url": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/download.html",
+  "license_url": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html",
+  "sha256": "40665852c49f218326590e204db91064a1ecfc3c6f8cbd7bbbcaac62c7cd409e",
+  "transform": {
+    "centre_mm": [
+      -250.5525570543502,
+      -108.95744881049842,
+      826.6332123823096
+    ],
+    "basis": [
+      [
+        -0.9885976594096877,
+        0.0,
+        0.15058110043988618
+      ],
+      [
+        -0.06048873637356146,
+        0.9157704215413295,
+        -0.3971217040177296
+      ],
+      [
+        -0.1378977178259919,
+        -0.40170204758006334,
+        -0.9053284952923816
+      ]
+    ],
+    "units": "metres"
+  },
+  "changes": "Right hand and distal forearm isolated; physical-scale rigid transform; surface subdivision and mild smoothing. Interiors filled along dorsal-palmar columns. Cortical shell, marrow and subcutaneous fat segmentation derived from source surfaces. Tissue parameters are illustrative, not measured patient MRI. Displayed bone and skin surfaces decimated to about 10 % of their triangles (quadric edge collapse) for the headset frame budget. Muscle surfaces decimated the same way (0.8.3).",
+  "dimensions": [
+    144,
+    80,
+    336
+  ],
+  "spacing_mm": 1.25,
+  "structures": [
+    {
+      "file": "Skin.obj",
+      "name": "skin",
+      "fma": "FMA7163",
+      "element": "FJ2810",
+      "vertices": 2582,
+      "triangles": 5080
+    },
+    {
+      "file": "Bone_FJ3349.obj",
+      "name": "right radius",
+      "fma": "FMA23464",
+      "element": "FJ3349",
+      "vertices": 614,
+      "triangles": 970
+    },
+    {
+      "file": "Bone_FJ3391.obj",
+      "name": "right ulna",
+      "fma": "FMA23467",
+      "element": "FJ3391",
+      "vertices": 672,
+      "triangles": 1006
+    },
+    {
+      "file": "Bone_FJ3389.obj",
+      "name": "right trapezoid",
+      "fma": "FMA23725",
+      "element": "FJ3389",
+      "vertices": 352,
+      "triangles": 574
+    },
+    {
+      "file": "Bone_FJ3383.obj",
+      "name": "right scaphoid",
+      "fma": "FMA24435",
+      "element": "FJ3383",
+      "vertices": 284,
+      "triangles": 514
+    },
+    {
+      "file": "Bone_FJ3374.obj",
+      "name": "right lunate",
+      "fma": "FMA24437",
+      "element": "FJ3374",
+      "vertices": 287,
+      "triangles": 529
+    },
+    {
+      "file": "Bone_FJ3390.obj",
+      "name": "right triquetral",
+      "fma": "FMA24439",
+      "element": "FJ3390",
+      "vertices": 179,
+      "triangles": 271
+    },
+    {
+      "file": "Bone_FJ3382.obj",
+      "name": "right pisiform",
+      "fma": "FMA24441",
+      "element": "FJ3382",
+      "vertices": 162,
+      "triangles": 303
+    },
+    {
+      "file": "Bone_FJ3388.obj",
+      "name": "right trapezium",
+      "fma": "FMA24443",
+      "element": "FJ3388",
+      "vertices": 393,
+      "triangles": 694
+    },
+    {
+      "file": "Bone_FJ3361.obj",
+      "name": "right capitate",
+      "fma": "FMA24446",
+      "element": "FJ3361",
+      "vertices": 373,
+      "triangles": 684
+    },
+    {
+      "file": "Bone_FJ3367.obj",
+      "name": "right hamate",
+      "fma": "FMA24448",
+      "element": "FJ3367",
+      "vertices": 472,
+      "triangles": 834
+    },
+    {
+      "file": "Bone_FJ3327.obj",
+      "name": "proximal phalanx of right thumb",
+      "fma": "FMA24450",
+      "element": "FJ3327",
+      "vertices": 284,
+      "triangles": 508
+    },
+    {
+      "file": "Bone_FJ3322.obj",
+      "name": "proximal phalanx of right index finger",
+      "fma": "FMA24451",
+      "element": "FJ3322",
+      "vertices": 333,
+      "triangles": 618
+    },
+    {
+      "file": "Bone_FJ3325.obj",
+      "name": "proximal phalanx of right middle finger",
+      "fma": "FMA24452",
+      "element": "FJ3325",
+      "vertices": 397,
+      "triangles": 731
+    },
+    {
+      "file": "Bone_FJ3326.obj",
+      "name": "proximal phalanx of right ring finger",
+      "fma": "FMA24453",
+      "element": "FJ3326",
+      "vertices": 319,
+      "triangles": 601
+    },
+    {
+      "file": "Bone_FJ3323.obj",
+      "name": "proximal phalanx of right little finger",
+      "fma": "FMA24454",
+      "element": "FJ3323",
+      "vertices": 267,
+      "triangles": 501
+    },
+    {
+      "file": "Bone_FJ3303.obj",
+      "name": "middle phalanx of right index finger",
+      "fma": "FMA24455",
+      "element": "FJ3303",
+      "vertices": 258,
+      "triangles": 420
+    },
+    {
+      "file": "Bone_FJ3306.obj",
+      "name": "middle phalanx of right middle finger",
+      "fma": "FMA24456",
+      "element": "FJ3306",
+      "vertices": 316,
+      "triangles": 545
+    },
+    {
+      "file": "Bone_FJ3292.obj",
+      "name": "middle phalanx of right ring finger",
+      "fma": "FMA24457",
+      "element": "FJ3292",
+      "vertices": 298,
+      "triangles": 506
+    },
+    {
+      "file": "Bone_FJ3304.obj",
+      "name": "middle phalanx of right little finger",
+      "fma": "FMA24458",
+      "element": "FJ3304",
+      "vertices": 219,
+      "triangles": 333
+    },
+    {
+      "file": "Bone_FJ3198.obj",
+      "name": "distal phalanx of right thumb",
+      "fma": "FMA24459",
+      "element": "FJ3198",
+      "vertices": 245,
+      "triangles": 383
+    },
+    {
+      "file": "Bone_FJ3193.obj",
+      "name": "distal phalanx of right index finger",
+      "fma": "FMA24460",
+      "element": "FJ3193",
+      "vertices": 237,
+      "triangles": 335
+    },
+    {
+      "file": "Bone_FJ3196.obj",
+      "name": "distal phalanx of right middle finger",
+      "fma": "FMA24461",
+      "element": "FJ3196",
+      "vertices": 183,
+      "triangles": 277
+    },
+    {
+      "file": "Bone_FJ3197.obj",
+      "name": "distal phalanx of right ring finger",
+      "fma": "FMA24462",
+      "element": "FJ3197",
+      "vertices": 174,
+      "triangles": 239
+    },
+    {
+      "file": "Bone_FJ3194.obj",
+      "name": "distal phalanx of right little finger",
+      "fma": "FMA24463",
+      "element": "FJ3194",
+      "vertices": 188,
+      "triangles": 301
+    },
+    {
+      "file": "Bone_FJ3350.obj",
+      "name": "right first metacarpal bone",
+      "fma": "FMA24464",
+      "element": "FJ3350",
+      "vertices": 469,
+      "triangles": 906
+    },
+    {
+      "file": "Bone_FJ3352.obj",
+      "name": "right second metacarpal bone",
+      "fma": "FMA24466",
+      "element": "FJ3352",
+      "vertices": 631,
+      "triangles": 1196
+    },
+    {
+      "file": "Bone_FJ3354.obj",
+      "name": "right third metacarpal bone",
+      "fma": "FMA24468",
+      "element": "FJ3354",
+      "vertices": 605,
+      "triangles": 1122
+    },
+    {
+      "file": "Bone_FJ3356.obj",
+      "name": "right fourth metacarpal bone",
+      "fma": "FMA24470",
+      "element": "FJ3356",
+      "vertices": 478,
+      "triangles": 857
+    },
+    {
+      "file": "Bone_FJ3358.obj",
+      "name": "right fifth metacarpal bone",
+      "fma": "FMA24472",
+      "element": "FJ3358",
+      "vertices": 419,
+      "triangles": 809
+    },
+    {
+      "file": "Muscle_FJ1466.obj",
+      "name": "abductor digiti minimi of right hand",
+      "fma": "FMA37396",
+      "element": "FJ1466",
+      "vertices": 241,
+      "triangles": 239
+    },
+    {
+      "file": "Muscle_FJ1470.obj",
+      "name": "flexor digiti minimi brevis of right hand",
+      "fma": "FMA37398",
+      "element": "FJ1470",
+      "vertices": 179,
+      "triangles": 239
+    },
+    {
+      "file": "Muscle_FJ1482.obj",
+      "name": "opponens digiti minimi of right hand",
+      "fma": "FMA37400",
+      "element": "FJ1482",
+      "vertices": 267,
+      "triangles": 289
+    },
+    {
+      "file": "Muscle_FJ1475.obj",
+      "name": "right flexor digitorum superficialis",
+      "fma": "FMA38470",
+      "element": "FJ1475",
+      "vertices": 1912,
+      "triangles": 2888
+    },
+    {
+      "file": "Muscle_FJ1499.obj",
+      "name": "right flexor digitorum superficialis",
+      "fma": "FMA38470",
+      "element": "FJ1499",
+      "vertices": 280,
+      "triangles": 390
+    },
+    {
+      "file": "Muscle_FJ1497.obj",
+      "name": "right flexor digitorum profundus",
+      "fma": "FMA38479",
+      "element": "FJ1497",
+      "vertices": 1747,
+      "triangles": 2468
+    },
+    {
+      "file": "Muscle_FJ1492.obj",
+      "name": "right extensor digitorum",
+      "fma": "FMA38501",
+      "element": "FJ1492",
+      "vertices": 1495,
+      "triangles": 2171
+    },
+    {
+      "file": "Muscle_FJ1510.obj",
+      "name": "set of lumbricals of right hand",
+      "fma": "FMA42398",
+      "element": "FJ1510",
+      "vertices": 1111,
+      "triangles": 1300
+    },
+    {
+      "file": "Muscle_FJ1511.obj",
+      "name": "set of palmar interossei of right hand",
+      "fma": "FMA42402",
+      "element": "FJ1511",
+      "vertices": 422,
+      "triangles": 457
+    },
+    {
+      "file": "Muscle_FJ1509.obj",
+      "name": "set of dorsal interossei of right hand",
+      "fma": "FMA42404",
+      "element": "FJ1509",
+      "vertices": 975,
+      "triangles": 1046
+    }
+  ],
+  "voxel_counts": {
+    "skin": 506234,
+    "bone": 64220,
+    "marrow": 24392,
+    "cortex": 39828
+  }
+}

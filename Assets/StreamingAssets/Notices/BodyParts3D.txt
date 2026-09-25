@@ -1,0 +1,4 @@
+BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International
+https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html
+https://creativecommons.org/licenses/by/4.0/
+Right hand and distal forearm extracted, transformed, subdivided and voxelized; the displayed bone and skin surfaces are decimated to about a tenth of their triangles. The tissue classes (skin, fat, muscle, tendon, cortical bone, marrow, other soft tissue) are derived segmentations of these surfaces; their relaxation values come from published measurements (see Scanner-model).

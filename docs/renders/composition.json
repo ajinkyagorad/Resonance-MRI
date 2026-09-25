@@ -1,0 +1,101 @@
+{
+  "01-scanner": {
+    "source_crop": [
+      340,
+      52,
+      1560,
+      1250
+    ],
+    "source": "/home/triton/projects/ResonanceQuest-spatial/validation/element-reference-093/01-scanner.png"
+  },
+  "02-moment-grid": {
+    "source_crop": [
+      421,
+      41,
+      1379,
+      1097
+    ],
+    "source": "/home/triton/projects/ResonanceQuest-spatial/validation/element-reference-093/02-moment-grid.png"
+  },
+  "03-molecules-and-spin": {
+    "source_crop": [
+      327,
+      74,
+      1473,
+      1223
+    ],
+    "source": "/home/triton/projects/ResonanceQuest-spatial/validation/element-reference-093/03-molecules-and-spin.png"
+  },
+  "04-receiver": {
+    "source_crop": [
+      106,
+      507,
+      1700,
+      792
+    ],
+    "source": "/home/triton/projects/ResonanceQuest-spatial/validation/element-reference-093/04-receiver.png"
+  },
+  "05-pulse-sequence": {
+    "source_crop": [
+      65,
+      106,
+      1735,
+      1202
+    ],
+    "source": "/home/triton/projects/ResonanceQuest-spatial/validation/element-reference-093/05-pulse-sequence.png"
+  },
+  "06-rf-and-iq": {
+    "source_crop": [
+      141,
+      85,
+      1514,
+      1092
+    ],
+    "source": "/home/triton/projects/ResonanceQuest-spatial/validation/element-reference-093/06-rf-and-iq.png"
+  },
+  "07-kspace-and-image": {
+    "source_crop": [
+      328,
+      215,
+      1695,
+      1097
+    ],
+    "source": "/home/triton/projects/ResonanceQuest-spatial/validation/element-reference-093/07-kspace-and-image.png"
+  },
+  "08-reconstructed-volume": {
+    "source_crop": [
+      243,
+      252,
+      1557,
+      1048
+    ],
+    "source": "/home/triton/projects/ResonanceQuest-spatial/validation/element-reference-093/08-reconstructed-volume.png"
+  },
+  "09-t1-recovery": {
+    "source_crop": [
+      421,
+      41,
+      1379,
+      1097
+    ],
+    "source": "/home/triton/projects/ResonanceQuest-spatial/validation/element-reference-093/09-t1-recovery.png"
+  },
+  "10-t2-coherence": {
+    "source_crop": [
+      421,
+      41,
+      1379,
+      1097
+    ],
+    "source": "/home/triton/projects/ResonanceQuest-spatial/validation/element-reference-093/10-t2-coherence.png"
+  },
+  "11-controls": {
+    "source_crop": [
+      63,
+      781,
+      1737,
+      892
+    ],
+    "source": "/home/triton/projects/ResonanceQuest-spatial/validation/element-reference-093/11-controls.png"
+  }
+}

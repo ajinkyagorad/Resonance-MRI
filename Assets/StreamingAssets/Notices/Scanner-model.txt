@@ -1,0 +1,114 @@
+# Spatial RF topology — 0.9.1
+
+The educational 1 T magnet and gradient windings are unchanged. The transmit birdcage is now 130 mm radius and 540 mm long, inside the gradient assembly. Its quadrature current pattern and B1+ are computed from its conductor paths. Main-magnet display loops are representative winding bundles of the existing pack model.
+
+The independent 55 mm radius receive loop lies in x-z at y=50 mm, above the hand. Its normal is transverse to B0. The loop's unit-current field is calculated with the circular-loop Biot–Savart solution. The complex peak-envelope weighting is phase-calibrated to By+iBx in the exp(-iωt) convention. For Mx=A cos(ωt), My=-A sin(ωt), -d(M·B)/dt = ωA(By cos(ωt)+Bx sin(ωt)), verifying the phase/sign convention. The received signal uses this sensitivity, not the transmitter B1+ map. Receive amplitude variation therefore appears in the reconstructed image; no receive-bias correction is claimed.
+
+This is a quasistatic educational model. It does not solve sample-dependent RF propagation, matching networks, active detuning electronics, dielectric effects, SAR or clinical hardware tolerances. Receiver electronics retain the explicit MaRCoS-derived example documented separately. The displayed transmit current uses the same slowed carrier phase as the magnetic moments and B1 glyphs; flow markers show conventional current direction.
+
+Checks compare the transmit centre field against independent numerical line integration, the receive loop centre against μ0/(2R), receive falloff against the on-axis loop formula, and baked fields against direct evaluation. Existing Bloch, acquisition, demodulation and reconstruction tests also run.
+
+References:
+- Oxford FMRIB MRI hardware overview: https://users.fmrib.ox.ac.uk/~stuart/thesis/chapter_2/section2_6.html
+- Vaidya et al., transmit/receive field patterns and reciprocity: https://pmc.ncbi.nlm.nih.gov/articles/PMC5082994/
+- Existing MaRCoS reference and tissue/provenance documentation remains distributed.
+
+Earlier model notes (superseded RF dimensions):
+# Resonance MRI 0.8.3: the simulated scanner
+
+The app simulates one scanner: a 1.0 T superconducting extremity MRI with a birdcage transmit/receive coil and three gradient coils. Every field in the scene comes from the drawn conductors by the Biot–Savart law. The winding layouts are this app's own designs, sized like a dedicated 1 T extremity scanner. They are not copied from a commercial product. The numbers below are computed by the app's own code (`Tools/simcore`) from the same winding definitions that the headset uses.
+
+## Magnet (B₀, green)
+
+- Three mirrored pairs of NbTi winding packs lie between radii 220 and 250 mm, with a 1.44 × 1.44 mm conductor, all in series.
+- The pack centres sit at z = ±36.3, ±126.5 and ±301.1 mm. Their lengths are 33.3, 49.3 and 132.2 mm (481, 713 and 1912 turns).
+- The centre field is 7.537 mT per ampere, so 1.000 T needs 132.7 A. The persistent current is drawn flowing in the packs.
+- Computed peak-to-peak field variation: 0.58 ppm over a 12 cm sphere, 1.9 ppm over 14 cm and 6.0 ppm over 16 cm. A built magnet reaches this only after shimming. This one has exact windings, so it needs no shims.
+- Each pack is integrated with a 4 × 8 Gauss–Legendre grid of filament loops (elliptic integrals).
+
+## Gradient coils (Gx violet, Gy blue, Gz cyan)
+
+| Coil | Design | Radius | Turns | Gradient per ampere |
+|---|---|---|---|---|
+| Gx | Golay double saddle | 155 mm | 4 | 0.1541 mT/m |
+| Gy | the same saddle turned 90° | 160 mm | 4 | 0.1447 mT/m |
+| Gz | Maxwell pair at ±(√3/2)·radius | 165 mm | 5 | 0.1480 mT/m |
+
+- At 60 mm from the centre, the gradient departs from linear by −0.9 % (Gz) and −1.6 % (Gx).
+- The lesson's largest current is 68.8 A, and its fastest change is 58.7 T/m/s.
+- Each coil's full vector field is summed with B₀. The small transverse (concomitant) components are therefore included.
+
+## RF coil (pink)
+
+- A quadrature low-pass birdcage: 12 rungs at 80 mm radius, 200 mm long, with end-ring currents that satisfy Kirchhoff's law.
+- It gives 16.29 µT of rotating B₁ per ampere of rung current at the centre. B₁ stays within +3 % and −14 % of that over a 50 mm radius and ±60 mm length. The counter-rotating part is 7 %.
+- The same coil receives. Its sensitivity is the same B₁ map (reciprocity), so tissue near the rungs contributes more signal.
+
+## Protocol
+
+- Two hard-pulse demonstrations come first: a 0.5 ms 90° pulse (B₁ 11.7 µT) followed by the free induction decay, then a Gz dephase and rephase echo.
+- The imaging protocol is a 2-D spoiled gradient echo:
+  - a 90° Hamming-windowed sinc (time-bandwidth 4, 1.5 kHz, 2.67 ms) under a 7.05 mT/m slice gradient, for a 5.0 mm slice;
+  - a slice rephaser, a phase-encode pulse along y, and a readout along x at 5.87 mT/m;
+  - 32 kHz receiver bandwidth: 64 samples at 31.25 µs;
+  - TE 6.02 ms, TR 3 s, field of view 128 mm, 64 × 64 matrix (2 mm pixels);
+  - nine slices from −40 to +40 mm.
+- A clinical scanner would interleave the slices within each TR. The lesson acquires them one after another so the picture stays simple. The simulated scan therefore lasts 29 minutes, and the lesson shows it only at each echo.
+- Adjustable on the plinth: B₀ (0.05–1 T), RF bandwidth, slice-gradient current, slice position and matrix size. Any change re-runs the whole simulation.
+
+## Tissue
+
+The BodyParts3D right hand is segmented into skin, fat, muscle, tendon, cortical bone, marrow and other soft tissue at 1.25 mm. Relaxation times are interpolated log–log in field strength between literature values. At 1 T:
+
+| Tissue | Proton density (water = 1) | T₁ | T₂ (T₂* for tendon and bone) |
+|---|---|---|---|
+| muscle and other soft tissue | 0.80 | 902 ms | 35.7 ms |
+| skin | 0.70 | 902 ms | 10 ms |
+| fat and marrow | 0.95 / 0.85 | 262 ms | 153.5 ms, −3.4 ppm shift |
+| tendon | 0.70 | 600 ms | 1.5 ms |
+| cortical bone | 0.20 | 140 ms | 0.4 ms |
+
+## Spins, signal and image
+
+- The simulation's unit is the isochromat: the net magnetization of the protons in one cell.
+- The proton volume uses 100 isochromats at random positions in the tissue of a 5 × 5 × 12 mm block of the hand, centred on the slice. You can move the block. Through the slice it holds the 5 mm slab and tissue outside it. The glow in the scanner uses about 16 000 isochromats on a 4 mm grid.
+- Each slice's signal comes from about 43 000 isochromats: 1 mm in-plane, and a quarter of the slice thickness through the plane, over 2.5 slice thicknesses.
+- Each isochromat follows the Bloch equation in the frame rotating at the RF frequency. RF is stepped every 10 µs. Free precession and relaxation are exact.
+- The coil voltage follows from reciprocity, with thermal noise from the coil and the hand.
+- The receiver follows the MaRCoS console architecture: direct 16-bit sampling at 122.88 MS/s, digital mixing, then CIC and FIR filters down to 32 000 samples/s. The app computes the filtered samples directly. In the server tests, a full model of that chain reproduces them within 0.02 % RMS.
+- The image is the inverse 2-D Fourier transform of the acquired rows.
+
+## The views (0.8.3)
+
+- **Proton volume.** Each of the 100 isochromats, at its random position, is drawn as one proton: a lit needle (its moment) with a ring turning about it (its spin). Protons in the same local field behave alike, because each isochromat sees its own field.
+  - Its resting direction is thermal: random, with a bias toward the field exaggerated so that the net alignment is 61 %. The real excess at 1 T is 3.4 per million, and the narration says it is exaggerated.
+  - It precesses about z in the lab frame, one turn every 2 s as drawn, plus its own Larmor offset.
+  - The RF tips it by its isochromat's own tip angle, so only protons inside the RF band tip; those outside keep precessing.
+  - Gradients give each proton its own phase, so the twist grows across the volume.
+  - As its isochromat's magnetization decays, it returns toward disorder, and as it regrows, toward the field.
+- **Close-up.** The selected proton, magnified, in the lab frame and in the frame turning with the RF. It shows μ, the circle its tip precesses on and the tip's recent path, the isochromat's net magnetization M, B₀ and B₁, and a line of live values.
+- **Scanner fields.**
+  - B₀ lines are traced along the magnet's computed field. Their brightness follows the local \|B\|, so a gradient brightens one end.
+  - The B₁ arrows show the birdcage's computed co-rotating field times the drive, turning with the carrier.
+- **Plots.**
+  - The sequence plot draws the programmed currents (RF envelope, Gz, Gy, Gx) and the ADC window.
+  - The signal plot draws the receiver's output samples of the current readout in t, I and Q as they arrive, with the RF voltage v(t), whose carrier is drawn slowed.
+  - k-space is drawn one measured row at a time; the image and the 3-D volume are the acquisition's own reconstruction.
+
+## What is shown differently from reality
+
+- **Time.** The carrier view is slowed to one turn per 2 s (the lab frame). Pulses are slowed so that 1 s shows 0.1 ms, and relaxation so that 1 s shows 10 ms. The rotating frame is used everywhere else. The strip always shows the physical time and the current slowing.
+- **Field.** The haze shows how |B| differs from its centre value, on a scale of ±0.6 mT. A gradient therefore appears as a brightness ramp along its axis. B₀ itself appears as the uniform green.
+- **Size.** The scanner is displayed at 0.7 × its size. The proton volume's 5 × 5 × 12 mm block is displayed stretched in-plane (5 : 5 : 4).
+- **Protons.** Each needle is drawn as one proton's moment in the classical picture. The simulation itself tracks the cells' net magnetization. The needles' shared bias is exaggerated about 10⁵ times so that it can be seen.
+- **Precession.** In the lab frame, precession is always drawn at one turn per 2 s. The phase differences between protons are the simulation's own.
+
+## Not modelled
+
+Eddy currents, amplifier dynamics, shimming, RF loading, SAR and dielectric effects, susceptibility (T₂′), diffusion, flow, magnetization transfer, multi-peak fat, and non-exponential relaxation are not modelled. Spoiling is ideal: every repetition starts with no transverse magnetization. B₀ changes are instantaneous. Physical Quest performance has not been measured.
+
+## Sources
+
+- MaRCoS console: Negnevitsky et al., J. Magn. Reson. 2023, https://arxiv.org/abs/2208.01616
+- BodyParts3D, © The Database Center for Life Science, CC BY 4.0: https://dbarchive.biosciencedbc.jp/en/bodyparts3d/
+- Signal equation and spatial encoding: https://web.stanford.edu/class/rad229/Notes.html ; https://www.cis.rit.edu/htbooks/mri/

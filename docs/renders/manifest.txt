@@ -1,0 +1,14 @@
+Unity 6000.5.5f1 / app 0.9.3
+Actual runtime geometry and shaders; white camera background; dark export labels; orthographic reframing.
+Captures use different recorded lesson states, not one simultaneous scanner instant.
+02-moment-grid | cue=2.30 | t=0 | tau=115.38249988555911 | renderers=16
+09-t1-recovery | cue=2.21 | t=0 | tau=50.510000038146977 | renderers=16
+10-t2-coherence | cue=2.22 | t=0 | tau=57.175000000000011 | renderers=16
+01-scanner | cue=6.6 | t=10.107517080000001 | tau=34.371800190731811 | renderers=146
+03-molecules-and-spin | cue=3.8 | t=0.00155 | tau=42.82875044346963 | renderers=123
+04-receiver | cue=4.9 | t=0.01355 | tau=45.680000400542475 | renderers=16
+05-pulse-sequence | cue=9.4 | t=139.11240562500004 | tau=14.819999599456789 | renderers=16
+06-rf-and-iq | cue=7.6 | t=10.112405625000005 | tau=37.737499713913124 | renderers=10
+07-kspace-and-image | cue=9.7 | t=199.11340562500004 | tau=31.549999427795409 | renderers=15
+08-reconstructed-volume | cue=10.6 | t=16327.113405625 | tau=29.724999904632568 | renderers=86
+11-controls | cue=10.6 | t=16327.113405625 | tau=29.724999904632568 | renderers=18
