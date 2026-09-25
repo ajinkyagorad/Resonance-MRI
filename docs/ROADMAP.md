@@ -1,6 +1,6 @@
 # Public improvement roadmap
 
-The published 0.9.3 baseline preserves the current experience. These tasks record review feedback; unchecked work is planned.
+The preserved 0.9.3 baseline and incremental 0.9.4 update keep the existing lesson content available. These tasks record review feedback; unchecked work is planned.
 
 ## Attention and spatial explanation
 
@@ -10,7 +10,8 @@ The published 0.9.3 baseline preserves the current experience. These tasks recor
 - [ ] Place the relevant plot beside the active object before narration begins. Make newly introduced objects discoverable, movable and recoverable.
 - [ ] Preserve the volumetric 6x6x8 grid at useful scale, including outside-band moments; show the hand ROI linked through tissue to microscopic representation.
 - [ ] Improve side-view scanner inspection, coil cutaway visibility, winding current flow and cached field-line visibility. Inactive coils remain translucent context.
-- [ ] Review four styles per rendered component. Maintain passthrough, depth cues, clear functions, consistent symbols and restrained lighting without dashboard backings.
+- [x] Publish four generated style studies per rendered component, linked to actual Unity source renders.
+- [ ] Review and select a style per rendered component. Maintain passthrough, depth cues, clear functions, consistent symbols and restrained lighting without dashboard backings.
 
 ## Physical causal chain
 
@@ -34,7 +35,10 @@ The published 0.9.3 baseline preserves the current experience. These tasks recor
 
 - [ ] Make narration progress and pause reliable; use one slim progress indicator, standard speaker/mute symbols, voice selection and persistent discoverable controls.
 - [ ] Verify theme contrast and room-light stability, compact button ergonomics, grip / ray manipulation and arrangement recovery.
-- [ ] Add a source-repository link in the existing in-app information area after the initial source publication.
+- [x] Add a source-repository link in the existing in-app information area.
+- [x] Add a draggable narration timeline, pause-preserving section navigation and synchronized 1×/2×/4× lesson playback with pitch-preserving audio.
+- [x] Retain all 288 context glyphs in the single-spin lesson and separate the translucent full moment / phase projections.
+- [ ] Validate these controls, audio synchronization and lattice visibility on physical Quest hardware.
 - [ ] Run physical Quest checks for readability, selection, boundary behavior, controller alignment and sustained frame rate.
 - [ ] Complete Horizon App ID, release signing, privacy / asset declarations and device validation.
 - [ ] Keep transcript, primary-source references, generated concepts and implemented screenshots clearly versioned.

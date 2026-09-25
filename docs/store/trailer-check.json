@@ -1,0 +1,118 @@
+{
+  "duration": 39.813,
+  "video_codec": "h264",
+  "audio_codec": "aac",
+  "size": [
+    1920,
+    1080
+  ],
+  "fps": "24/1",
+  "source": {
+    "version": "0.9.4",
+    "method": "Actual Unity runtime; native VR studio; deterministic lesson replay",
+    "physicalQuestCapture": false,
+    "screenshots": [
+      {
+        "file": "screenshots/01-1-1.png",
+        "cue": "1.1",
+        "clip": "",
+        "tau": 3.959999942779541,
+        "physicalTime": 0.0,
+        "duration": 0.0,
+        "frames": 0
+      },
+      {
+        "file": "screenshots/02-2-18.png",
+        "cue": "2.18",
+        "clip": "",
+        "tau": 28.410000038146972,
+        "physicalTime": 0.0,
+        "duration": 0.0,
+        "frames": 0
+      },
+      {
+        "file": "screenshots/03-2-30.png",
+        "cue": "2.30",
+        "clip": "",
+        "tau": 113.75499982833865,
+        "physicalTime": 0.0,
+        "duration": 0.0,
+        "frames": 0
+      },
+      {
+        "file": "screenshots/04-4-9.png",
+        "cue": "4.9",
+        "clip": "",
+        "tau": 44.78500041961596,
+        "physicalTime": 0.01355,
+        "duration": 0.0,
+        "frames": 0
+      },
+      {
+        "file": "screenshots/05-9-7.png",
+        "cue": "9.7",
+        "clip": "",
+        "tau": 29.39999942779541,
+        "physicalTime": 199.11340562500004,
+        "duration": 0.0,
+        "frames": 0
+      }
+    ],
+    "segments": [
+      {
+        "file": "trailer/1-1",
+        "cue": "1.1",
+        "clip": "Narration/am_michael/c01_01",
+        "tau": 0.0,
+        "physicalTime": 0.0,
+        "duration": 6.958333333333333,
+        "frames": 167
+      },
+      {
+        "file": "trailer/2-18",
+        "cue": "2.18",
+        "clip": "Narration/am_michael/c02_05",
+        "tau": 0.0,
+        "physicalTime": 0.0,
+        "duration": 6.333333333333333,
+        "frames": 152
+      },
+      {
+        "file": "trailer/2-21",
+        "cue": "2.21",
+        "clip": "Narration/am_michael/c02_08",
+        "tau": 0.0,
+        "physicalTime": 0.0,
+        "duration": 7.333333333333333,
+        "frames": 176
+      },
+      {
+        "file": "trailer/2-22",
+        "cue": "2.22",
+        "clip": "Narration/am_michael/c02_09",
+        "tau": 0.0,
+        "physicalTime": 0.0,
+        "duration": 7.625,
+        "frames": 183
+      },
+      {
+        "file": "trailer/2-30",
+        "cue": "2.30",
+        "clip": "Narration/am_michael/c02_17",
+        "tau": 0.0,
+        "physicalTime": 0.0,
+        "duration": 5.791666666666667,
+        "frames": 139
+      },
+      {
+        "file": "trailer/9-7",
+        "cue": "9.7",
+        "clip": "Narration/am_michael/c09_07",
+        "tau": 0.0,
+        "physicalTime": 0.0,
+        "duration": 5.75,
+        "frames": 138
+      }
+    ]
+  }
+}

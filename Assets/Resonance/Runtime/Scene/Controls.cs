@@ -37,13 +37,13 @@ namespace Nebulytic.Resonance
         sealed class Side
         {
             public readonly ReleaseGate Gate = new ReleaseGate(); public Transform Anchor, Model; public OVRHand Hand; public Animator Animator;
-            public bool Trigger, Grip, One, Two, Stick, Flick, HandMode; public Transform Held; public string HeldKind; public Vector3 Offset; public Quaternion Rotation, GrabAim, GrabShared; public float HeldYaw;
+            public bool Trigger, Grip, One, Two, Stick, Flick, HandMode, Scrubbing; public Transform Held; public string HeldKind; public Vector3 Offset; public Quaternion Rotation, GrabAim, GrabShared; public float HeldYaw;
             public readonly List<TextMeshPro> Labels = new List<TextMeshPro>(); public readonly List<Transform> Bones = new List<Transform>();
             public Transform Ray; public Renderer[] HandRenderers; public float KnobRepeat;
         }
 
         readonly Side[] sides = { new Side(), new Side() };
-        bool initialized, hadFocus; readonly RaycastHit[] hits = new RaycastHit[32];
+        bool initialized, hadFocus, desktopScrubbing; readonly RaycastHit[] hits = new RaycastHit[32];
         Transform desktopHeld; string desktopKind; Vector3 desktopOffset; float desktopDistance; Vector2 lastMouse; Transform desktopTurning; string desktopTurnKind;
 
         public static Transform FindControl(Transform root, int side, int key)
@@ -80,11 +80,12 @@ namespace Nebulytic.Resonance
 
         public void ReleaseAll()
         {
-            desktopHeld = null;
+            desktopHeld = null; desktopTurning = null; desktopScrubbing = false;
+            if (App) App.EndScrub(false);
             foreach (var s in sides)
             {
                 if (s.HeldKind == "region" && s.Held) App.CommitRegion();
-                s.Held = null; s.HeldKind = null; s.Gate.Reset(); s.Trigger = s.Grip = s.One = s.Two = s.Stick = s.Flick = false;
+                s.Held = null; s.HeldKind = null; s.Scrubbing = false; s.Gate.Reset(); s.Trigger = s.Grip = s.One = s.Two = s.Stick = s.Flick = false;
                 if (s.Ray) s.Ray.gameObject.SetActive(false);
             }
         }
@@ -151,11 +152,12 @@ namespace Nebulytic.Resonance
                 if (t && !s.Trigger && target)
                 {
                     var btn = target.GetComponent<StripButton>();
-                    if (btn) { App.Action(btn.Action); Haptic(c); }
+                    if (btn) { if(btn.Action=="seek")s.Scrubbing=App.BeginScrub(ray); else if(!App.Scrubbing)App.Action(btn.Action); Haptic(c); }
                     else if (App.SelectProton(ray)) Haptic(c);
                 }
+                if(s.Scrubbing) { if(t) App.DragScrub(ray); else { App.EndScrub(); s.Scrubbing=false; } }
                 // Grip: grab an item or the region frame.
-                if (g && !s.Grip && target && !(hand && target.GetComponent<StripButton>()))
+                if (g && !s.Grip && target && !App.Scrubbing && !target.GetComponent<StripButton>())
                 {
                     var grab = target.GetComponentInParent<Grabbable>();
                     if (grab && grab.transform != sides[1 - i].Held)
@@ -185,10 +187,10 @@ namespace Nebulytic.Resonance
                     }
                 }
                 // Buttons: no pointing needed.
-                if (one && !s.One) { if (i == 1) App.Next(); else App.TogglePlay(); Haptic(c); }
-                if (two && !s.Two) { if (i == 1) App.Previous(); else ToggleHelp(); Haptic(c); }
+                if (one && !s.One && !App.Scrubbing) { if (i == 1) App.Next(); else App.TogglePlay(); Haptic(c); }
+                if (two && !s.Two && !App.Scrubbing) { if (i == 1) App.Previous(); else ToggleHelp(); Haptic(c); }
                 if (stickPress && !s.Stick && !s.Held && i == 0 && stick.sqrMagnitude < 0.09f) App.Recenter();
-                if (!s.Held)
+                if (!s.Held && !App.Scrubbing)
                 {
                     if (Mathf.Abs(stick.x) > 0.7f && Mathf.Abs(stick.x) > Mathf.Abs(stick.y) * 1.5f && !s.Flick) { s.Flick = true; if (stick.x > 0) App.Next(); else App.Previous(); Haptic(c); }
                     else if (Mathf.Abs(stick.x) < 0.3f) s.Flick = false;
@@ -216,8 +218,9 @@ namespace Nebulytic.Resonance
 
         void ReleaseSide(Side s)
         {
+            if(s.Scrubbing) App.EndScrub(false);
             if (s.HeldKind == "region" && s.Held) App.CommitRegion();
-            s.Held = null; s.HeldKind = null; s.Gate.Reset(); s.Trigger = s.Grip = s.One = s.Two = false;
+            s.Held = null; s.HeldKind = null; s.Scrubbing = false; s.Gate.Reset(); s.Trigger = s.Grip = s.One = s.Two = false;
         }
 
         void UpdateHelp(Side s, int i, bool usable)
@@ -261,7 +264,7 @@ namespace Nebulytic.Resonance
             if (mouse.leftButton.wasPressedThisFrame && target)
             {
                 var btn = target.GetComponent<StripButton>();
-                if (btn) App.Action(btn.Action);
+                if (btn) { if(btn.Action=="seek")desktopScrubbing=App.BeginScrub(ray); else App.Action(btn.Action); }
                 else if (App.SelectProton(ray)) { } // a click on a proton shows it in the close-up
                 else
                 {
@@ -269,6 +272,7 @@ namespace Nebulytic.Resonance
                     if (grab) { desktopHeld = grab.transform; desktopKind = grab.Kind; desktopDistance = Vector3.Distance(ray.origin, point); desktopOffset = desktopHeld.position - point; }
                 }
             }
+            if(desktopScrubbing) { if(mouse.leftButton.isPressed)App.DragScrub(ray); else { App.EndScrub(); desktopScrubbing=false; } }
             if (!mouse.leftButton.isPressed && desktopHeld) { if (desktopKind == "region") App.CommitRegion(); desktopHeld = null; }
             if (desktopHeld)
             {
@@ -306,6 +310,9 @@ namespace Nebulytic.Resonance
             if (key.spaceKey.wasPressedThisFrame || key.xKey.wasPressedThisFrame) App.TogglePlay();
             if (key.rightArrowKey.wasPressedThisFrame || key.pageDownKey.wasPressedThisFrame || key.aKey.wasPressedThisFrame) App.Next();
             if (key.leftArrowKey.wasPressedThisFrame || key.pageUpKey.wasPressedThisFrame || key.bKey.wasPressedThisFrame) App.Previous();
+            if(key.commaKey.wasPressedThisFrame)App.MoveSection(-1);
+            if(key.periodKey.wasPressedThisFrame)App.MoveSection(1);
+            if(key.sKey.wasPressedThisFrame)App.Action("speed");
             if (key.rKey.wasPressedThisFrame) App.Recenter();
             if (key.vKey.wasPressedThisFrame) App.Action("mode");
             if (key.mKey.wasPressedThisFrame) App.Action("voice");

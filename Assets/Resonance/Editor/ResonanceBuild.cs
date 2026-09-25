@@ -1,6 +1,6 @@
 using System;using System.IO;using System.Linq;using Nebulytic.Resonance;using UnityEditor;using UnityEditor.Build;using UnityEditor.Build.Reporting;using UnityEditor.SceneManagement;using UnityEditor.XR.Management;using UnityEditor.XR.Management.Metadata;using UnityEditor.XR.OpenXR.Features;using UnityEngine;using UnityEngine.Rendering;using UnityEngine.XR.Management;using UnityEngine.XR.OpenXR;using UnityEngine.XR.OpenXR.Features;using UnityEngine.XR.OpenXR.Features.Interactions;
 public static class ResonanceBuild {
- public const string ScenePath="Assets/Scenes/Resonance.unity";public const string Version="0.9.3";public const int VersionCode=16;
+ public const string ScenePath="Assets/Scenes/Resonance.unity";public const string Version="0.9.4";public const int VersionCode=17;
  public static void Configure(){
  PrepareMathFont();EditorSettings.serializationMode=SerializationMode.ForceText;Directory.CreateDirectory("Assets/Scenes");Directory.CreateDirectory("Assets/XR/Settings");Directory.CreateDirectory("Builds");
  var group=BuildTargetGroup.Android;

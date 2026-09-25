@@ -39,6 +39,31 @@ public static class ResonanceValidation
         for (int i = 0; i < n; i++) { int f = Time.frameCount; await Until(() => Time.frameCount > f, 1); }
     }
 
+    // Fast layout gate for UI geometry changes; the full validation remains authoritative.
+    public static async void RunLayout()
+    {
+        Directory.CreateDirectory("validation/playback-094");
+        report = new Report { version = ResonanceBuild.Version };
+        int code=1;
+        try {
+            EditorSceneManager.OpenScene(ResonanceBuild.ScenePath);
+            EditorSettings.enterPlayModeOptionsEnabled=true;
+            EditorSettings.enterPlayModeOptions=EnterPlayModeOptions.DisableDomainReload;
+            EditorApplication.isPlaying=true;
+            await Until(()=>UnityEngine.Object.FindAnyObjectByType<App>()?.Ready==true);
+            app=UnityEngine.Object.FindAnyObjectByType<App>();camera=app.HeadCamera;
+            await Until(()=>app.Sim.State!=null && app.World.gameObject.activeSelf && app.Lesson.Steps.Count>0);
+            app.FixedStep=true;app.Controls.enabled=false;app.GoToStep(0,false);
+            camera.fieldOfView=ReviewFov;camera.transform.rotation=Quaternion.Euler(ReviewPitch,0,0);
+            await WaitFrames(3);LayoutChecks();
+            report.passed=report.failures.Count==0;code=report.passed?0:1;
+        } catch(Exception e) {report.failures.Add(e.ToString());}
+        finally {
+            File.WriteAllText("validation/playback-094/layout-report.json",JsonUtility.ToJson(report,true));
+            EditorApplication.isPlaying=false;EditorApplication.Exit(code);
+        }
+    }
+
     public static async void Run()
     {
         Directory.CreateDirectory("validation/renders/cues");

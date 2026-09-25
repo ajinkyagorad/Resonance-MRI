@@ -1,0 +1,33 @@
+{
+  "name": "Resonance MRI",
+  "short_description": "Explore how MRI works in mixed reality and VR. Follow magnetic fields, hydrogen moments, RF pulses, spatial encoding and reconstructed signals through an interactive educational simulation.",
+  "long_description": "See how magnetic resonance becomes an image.\n\nResonance MRI is an open-source educational experience for Meta Quest 3 and 3S. Place an exposed-coil scanner, an anatomical hand model and a volumetric moment lattice in your room, or explore them in the app’s VR studio.\n\nFollow guided explanations of static fields, RF excitation, relaxation, gradients, signal reception and k-space. Inspect a 6 × 6 × 8 sample grid and compare the laboratory and rotating frames. Watch the pulse sequence, received voltage, I/Q signal and reconstructed data together.\n\nPause, scrub to a point in the explanation, move between sections, and choose 1×, 2× or 4× playback. Choose either of two narration voices, mute audio or use captions. Move and rotate exhibits with Touch Plus controllers; hand interaction is also supported.\n\nThe hand and receiver are computational teaching models. The app does not scan your body or produce diagnostic images. Its public source, asset credits and improvement roadmap are available on GitHub so learners and developers can study, modify and build upon it.",
+  "website": "https://github.com/ajinkyagorad/Resonance-MRI",
+  "support": "https://github.com/ajinkyagorad/Resonance-MRI/issues",
+  "privacy_policy": "https://github.com/ajinkyagorad/Resonance-MRI/blob/main/docs/PRIVACY.md",
+  "price_proposal": "Free",
+  "category_proposal": "Education",
+  "languages": [
+    "English"
+  ],
+  "player_modes": [
+    "Single player"
+  ],
+  "supported_devices_proposal": [
+    "Meta Quest 3",
+    "Meta Quest 3S"
+  ],
+  "app_id": null,
+  "publisher_legal_name": null,
+  "iarc_certificate": null,
+  "status": "Prepared listing draft. Device validation and account configuration outstanding.",
+  "keywords": [
+    "MRI",
+    "magnetic resonance",
+    "physics",
+    "science",
+    "education",
+    "anatomy",
+    "open source"
+  ]
+}

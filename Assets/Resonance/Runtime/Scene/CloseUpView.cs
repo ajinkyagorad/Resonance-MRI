@@ -82,7 +82,7 @@ namespace Nebulytic.Resonance
                 var cm = Mats.Line(Color.white, false, 0.25f); cm.SetFloat("_ScaleWidth", 0);
                 var cgo = Mats.Object("Precession circle", fr, circle.Commit(new Mesh { name = "Unit circle" }), cm); cone[f] = cgo.transform;
                 // mu (one proton's moment, in its colour) with its spin ring; M (the isochromat's net magnetization, white); B1.
-                mu[f] = Mats.Object("mu", fr, MeshKit.Needle(0.045f, 0.11f, 0.2f), Mats.Solid(Look.MAG)).transform; muR[f] = mu[f].GetComponent<Renderer>();
+                mu[f] = Mats.Object("mu", fr, MeshKit.Needle(0.045f, 0.11f, 0.2f), Mats.Glass(new Color(Look.MAG.r,Look.MAG.g,Look.MAG.b,0.40f))).transform; muR[f] = mu[f].GetComponent<Renderer>();
                 spin[f] = Mats.Object("Spin ring", fr, MeshKit.Torus(1f, 0.08f, 40, 6), muR[f].sharedMaterial).transform; spinR[f] = spin[f].GetComponent<Renderer>(); spin[f].gameObject.SetActive(false);
                 Mats.Object("Spin bead", spin[f], MeshKit.Sphere(0.2f, 10, 6), muR[f].sharedMaterial, new Vector3(1, 0, 0));
                 net[f] = Mats.Object("M", fr, MeshKit.Needle(0.07f, 0.16f, 0.22f), Mats.Solid(Look.MAG)).transform;
@@ -158,7 +158,7 @@ namespace Nebulytic.Resonance
             // Lab frame: the carrier turns everything transverse; rotating frame: carrier 0.
             Vector3 m = grid.NetM(i); float mPerp = new Vector2(m.x, m.y).magnitude;
             Vector3 dLab = grid.MomentDir(i, carrier), dRot = grid.MomentDir(i, 0); // P frame, unit
-            Color pc = grid.ProtonColour(i);
+            Color pc = grid.ProtonColour(i); pc.a=app.EnsembleMoments?0.78f:0.40f;
             muR[0].sharedMaterial.SetColor("_Color", pc); muR[1].sharedMaterial.SetColor("_Color", pc);
             if (playing) trailClock += dt;
             if (trailClock >= 1f / 16 || trailCount == 0) { trailClock = 0; RecordTip(Frames.ToS(dLab.x, dLab.y, dLab.z) * Unit, Frames.ToS(dRot.x, dRot.y, dRot.z) * Unit); }
@@ -167,7 +167,7 @@ namespace Nebulytic.Resonance
                 double c = f == 0 ? carrier : 0;
                 Vector3 d = f == 0 ? dLab : dRot;
                 Vector3 ds = Frames.ToS(d.x, d.y, d.z);
-                Place(mu[f], ds, Unit * (app.EnsembleMoments ? Mathf.Clamp01(m.magnitude) : 1), 1.35f);
+                Place(mu[f], ds, Unit * (app.EnsembleMoments ? Mathf.Clamp01(m.magnitude) : 1), app.EnsembleMoments?0.85f:1.25f);
                 Labels.Set(muLabels[f], app.EnsembleMoments ? "M" : "μ");
                 // The spin ring turns about mu, a little over halfway up it.
                 spin[f].localPosition = ds * (0.55f * Unit); spin[f].localRotation = Quaternion.FromToRotation(Vector3.up, ds) * Quaternion.Euler(0, grid.SpinAngle(i) * Mathf.Rad2Deg, 0);

@@ -42,6 +42,11 @@ namespace Nebulytic.Resonance
         public int StepIndex { get; private set; }
         public double Tau { get; private set; }
         public bool Playing { get; private set; }
+        public const string RepositoryUrl = "https://github.com/ajinkyagorad/Resonance-MRI";
+        public int PlaybackRate { get; private set; } = 1;
+        public bool Scrubbing { get; private set; }
+        bool resumeAfterScrub, audioStalled;
+        public double StepDuration => CurrentStep?.Len ?? 0;
         public bool FixedStep; // headless validation: advance by exactly 1/72 s per frame, no audio
         public double T { get; private set; }
         public bool Lab { get; private set; }
@@ -108,7 +113,7 @@ namespace Nebulytic.Resonance
             // The pointer (0.8.4): a white chevron with a dark casing (reads over a bright room), turned to face the eye.
             var pointer = new GameObject("Pointer").transform; pointer.SetParent(World, false);
             var chev = new LineBuilder(); chev.Segment(new Vector3(-0.016f, 0, 0), new Vector3(0, 0.02f, 0), 0.0065f, Color.white); chev.Segment(new Vector3(0.016f, 0, 0), new Vector3(0, 0.02f, 0), 0.0065f, Color.white);
-            var chevMat = Mats.Line(Look.SCAF, false, 0.36f); chevMat.SetFloat("_ScaleWidth", 0);
+            var chevMat = Mats.Line(Look.SCAF, false, 0.36f, true); chevMat.SetFloat("_ScaleWidth", 0);
             chevron = Mats.Object("Chevron", pointer, chev.Commit(new Mesh { name = "Chevron" }), chevMat).transform;
             Attention.Pointer = pointer;
             foreach (var t in Items) homeScale[t] = t.localScale;
@@ -290,6 +295,10 @@ namespace Nebulytic.Resonance
                 case "prev": Previous(); break;
                 case "next": Next(); break;
                 case "play": TogglePlay(); break;
+                case "section-prev": MoveSection(-1); break;
+                case "section-next": MoveSection(1); break;
+                case "speed": SetPlaybackRate(PlaybackRate == 1 ? 2 : PlaybackRate == 2 ? 4 : 1); break;
+                case "repository": Pause(); Application.OpenURL(RepositoryUrl); break;
                 case "voice":
                     VoiceName = VoiceName == "am_michael" ? "bm_george" : "am_michael";
                     lessonData = Lesson.LoadData(VoiceName); if (Sim.State != null) RebuildLesson(true); break;
@@ -304,8 +313,48 @@ namespace Nebulytic.Resonance
         /// <summary>Seek used by validation and navigation: step and lesson time, applied immediately.</summary>
         public void Seek(int step, double tau, bool playing)
         {
-            StepIndex = Mathf.Clamp(step, 0, Lesson.Steps.Count - 1); Tau = tau; Playing = playing; Overview = false;
+            if (Lesson.Steps.Count == 0 || double.IsNaN(tau) || double.IsInfinity(tau)) return;
+            StepIndex = Mathf.Clamp(step, 0, Lesson.Steps.Count - 1);
+            Tau = Math.Max(0, Math.Min(tau, CurrentStep.Len)); Playing = playing; Overview = false;
+            DisplayCarrier = Math.IEEERemainder(Tau * Constants.TwoPi / Lesson.CarrierTurnSeconds, Constants.TwoPi);
+            wasLab = false;
             Strip.SetTicks(CurrentStep); lastCueKey = -1; StopAudio();
+        }
+
+        public void SetPlaybackRate(int rate)
+        {
+            if ((rate != 1 && rate != 2 && rate != 4) || rate == PlaybackRate) return;
+            PlaybackRate = rate; lastCueKey = -1; StopAudio();
+        }
+
+        /// <summary>Sentence-level navigation preserves pause, unlike chapter navigation.</summary>
+        public void MoveSection(int direction)
+        {
+            var step = CurrentStep; if (step == null) return;
+            int section = Lesson.CueAt(step, Tau) + (direction < 0 ? -1 : 1);
+            int index = StepIndex;
+            if (section < 0) { if (index == 0) section = 0; else { index--; section = Lesson.Steps[index].Cues.Count - 1; } }
+            if (section >= step.Cues.Count && index == StepIndex)
+            { if (index >= Lesson.Steps.Count - 1) section = step.Cues.Count - 1; else { index++; section = 0; } }
+            Seek(index, Lesson.Steps[index].Cues[section].Start, Playing);
+        }
+
+        public bool BeginScrub(Ray ray)
+        {
+            if (Scrubbing || CurrentStep == null || !Strip.SeekFraction(ray, out float f)) return false;
+            resumeAfterScrub = Playing; Pause(); Scrubbing = true;
+            Seek(StepIndex, f * StepDuration, false); return true;
+        }
+        public void DragScrub(Ray ray)
+        {
+            if (Scrubbing && Strip.SeekFraction(ray, out float f)) Seek(StepIndex, f * StepDuration, false);
+        }
+        public void EndScrub(bool resume = true)
+        {
+            if (!Scrubbing) return;
+            Scrubbing = false;
+            Playing = resume && resumeAfterScrub && Tau < StepDuration;
+            resumeAfterScrub = false;
         }
 
         // ------------------------------------------------------------------------------------------------ region
@@ -334,7 +383,7 @@ namespace Nebulytic.Resonance
         }
         float rebuildAt = -1; int kicks;
 
-        void StopAudio() { narration.Stop(); playingClip = null; }
+        void StopAudio() { narration.Stop(); playingClip = null; audioStalled = false; }
 
         // ------------------------------------------------------------------------------------------------ frame
 
@@ -381,8 +430,8 @@ namespace Nebulytic.Resonance
             AdvanceCarrier(dt);
             if(!Demonstrating) Scanner.Tick(dt, Playing, DisplayCarrier, fresh);
             long c4 = Cost.Lap(c3, ref Cost.Scanner);
-            Cube.Tick(dt, DisplayCarrier, FixedStep && instantEmphasis, Playing, fresh);
-            if(!Demonstrating) CloseUp.Tick(dt, DisplayCarrier, Playing);
+            Cube.Tick(dt * PlaybackRate, DisplayCarrier, FixedStep && instantEmphasis, Playing, fresh);
+            if(!Demonstrating) CloseUp.Tick(dt * PlaybackRate, DisplayCarrier, Playing);
             long c5 = Cost.Lap(c4, ref Cost.Cube);
             long c6 = c5;
             Plots.Tick(dt, speed);
@@ -427,7 +476,7 @@ namespace Nebulytic.Resonance
                 if (!wasLab) carrierOffset = DisplayCarrier - CarrierPhase(T);
                 DisplayCarrier = CarrierPhase(T) + carrierOffset;
             }
-            else if (Playing) DisplayCarrier += (FixedStep ? 1.0 / 72.0 : dt) * Constants.TwoPi / Lesson.CarrierTurnSeconds;
+            else if (Playing) DisplayCarrier += (FixedStep ? 1.0 / 72.0 : dt) * PlaybackRate * Constants.TwoPi / Lesson.CarrierTurnSeconds;
             DisplayCarrier = Math.IEEERemainder(DisplayCarrier, Constants.TwoPi);
             wasLab = Lab;
         }
@@ -439,11 +488,14 @@ namespace Nebulytic.Resonance
             if (Playing)
             {
                 // Stall: never show k-space or images beyond what the acquisition has computed.
-                if (NeedsRows(step, Tau + dt) && !RowsReady(step, Tau + dt)) { Stalled = true; return; }
-                Tau += FixedStep ? 1.0 / 72.0 : dt;
+                double advance = (FixedStep ? 1.0 / 72.0 : dt) * PlaybackRate;
+                if (NeedsRows(step, Tau + advance) && !RowsReady(step, Tau + advance))
+                { Stalled = true; if (!FixedStep && narration.isPlaying) { narration.Pause(); audioStalled = true; } return; }
+                if (audioStalled) { narration.UnPause(); audioStalled = false; }
+                Tau += advance;
                 if (!FixedStep && narration.isPlaying && Cue != null && playingClip == Cue.Clip)
                 {
-                    double ta = Cue.Start + Cue.Lead + narration.time;
+                    double ta = Cue.Start + Cue.Lead + narration.time * PlaybackRate;
                     double e = ta - Tau; Tau = Math.Abs(e) > 0.030 ? ta : Tau + 0.1 * e;
                 }
                 if (Tau >= step.Len)
@@ -479,8 +531,11 @@ namespace Nebulytic.Resonance
                 lastCueKey = key; StopAudio();
                 if (!string.IsNullOrEmpty(cue.Clip))
                 {
-                    var clip = Resources.Load<AudioClip>(cue.Clip);
-                    if (clip) { narration.clip = clip; narration.time = Mathf.Clamp((float)(Tau - cue.Start - cue.Lead), 0, clip.length - 0.01f); narration.Play(); playingClip = cue.Clip; }
+                    string path = PlaybackRate == 1 ? cue.Clip : "NarrationSpeed" + PlaybackRate + "/" + cue.Clip.Substring("Narration/".Length);
+                    var clip = Resources.Load<AudioClip>(path);
+                    double offset = (Tau - cue.Start - cue.Lead) / PlaybackRate;
+                    if (clip && offset < clip.length - 0.01)
+                    { narration.clip = clip; narration.pitch = 1; narration.time = Mathf.Clamp((float)offset, 0, clip.length - 0.01f); narration.Play(); playingClip = cue.Clip; }
                 }
             }
         }

@@ -1,7 +1,7 @@
-"""APK identity, manifest policy, signing, packaging and packed-asset checks for the private Quest update (0.8.4)."""
+"""APK identity, manifest policy, signing, packaging and packed-asset checks for the current Quest preview."""
 from pathlib import Path
 import subprocess, json, zipfile, hashlib, os, re
-VERSION, CODE = '0.9.3', 16
+VERSION, CODE = '0.9.4', 17
 r = Path(__file__).resolve().parents[1]; apk = r / f'Builds/Resonance-MRI-Quest-{VERSION}.apk'
 sdk = Path('/home/triton/Unity/Hub/Editor/6000.5.5f1/Editor/Data/PlaybackEngines/AndroidPlayer')
 aapt = sdk / 'SDK/build-tools/36.0.0/aapt2'; signer = sdk / 'SDK/build-tools/36.0.0/apksigner'
@@ -26,6 +26,10 @@ check('valid_signature', signed.returncode == 0)
 check('release_not_debuggable', not any('debuggable' in l and '0xffffffff' in l for l in manifest.splitlines()))
 with zipfile.ZipFile(apk) as z:
     names = z.namelist()
+    boot=z.read('assets/bin/Data/boot.config').decode()
+    check('xr_openxr_preinit', 'xrsdk-pre-init-library=UnityOpenXR' in boot)
+    check('xr_vulkan_offscreen_swapchain', 'xr-use-vulkan-offscreen-swapchain-no-main-display-buffer=1' in boot)
+    check('xr_vulkan_foveation_boot', 'xr-vulkan-extension-fragment-density-map-enabled=1' in boot)
     check('il2cpp_runtime', 'lib/arm64-v8a/libil2cpp.so' in names)
     check('meta_runtime', any('OVRPlugin' in n for n in names))
     check('openxr_runtime', any('openxr' in n.lower() and n.endswith('.so') for n in names))
@@ -58,6 +62,9 @@ check('no_old_tissue_volume', 'HandTissue.bytes' not in packed)
 for voice in ['am_michael', 'bm_george']:
     lesson = json.loads((r / f'Assets/Resources/Lesson/Lesson-{voice}.json').read_text())
     clips = [c[k] for s in lesson['steps'] for c in s['cues'] for k in ('clip', 'clipGeneric') if c.get(k)]
+    for rate in (2,4):
+        fast=[f'Resources/NarrationSpeed{rate}/'+c[len('Narration/'):]+'.ogg' for c in clips]
+        check(f'narration_{voice}_{rate}x_all_clips_packed', all(c in packed for c in fast))
     check(f'narration_{voice}_every_cue_has_audio', all(c['clip'] for s in lesson['steps'] for c in s['cues']))
     check(f'narration_{voice}_all_{len(clips)}_clips_packed', all(f'Resources/{c}.wav' in packed for c in clips))
     check(f'narration_{voice}_no_unused_clips', set(re.findall(rf'Resources/Narration/{voice}/\w+\.wav', packed)) <= {f'Resources/{c}.wav' for c in clips})

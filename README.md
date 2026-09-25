@@ -2,13 +2,13 @@
 
 An open-source, spatial MRI teaching experience built in Unity for **Meta Quest 3 passthrough / VR** and **Windows desktop**. Follow a simulated hand from magnetic fields and hydrogen moments to received signals, spatial encoding, k-space and reconstruction.
 
-**Current published baseline: 0.9.3.** This is an educational simulation with a synthetic acquisition of an anatomical model. It does not measure the user's hand. The existing experience is preserved; the [public roadmap](#public-roadmap) records the next improvements.
+**Current preview: 0.9.4.** The original [0.9.3 baseline](https://github.com/ajinkyagorad/Resonance-MRI/releases/tag/v0.9.3) remains available. This is an educational simulation with a synthetic acquisition of an anatomical model. It does not measure the user's hand. The existing lesson content is preserved; the [public roadmap](#public-roadmap) records the next improvements.
 
 ![Actual Unity-rendered elements on white](docs/renders/MRI-rendered-elements-white-0.9.3.png)
 
 [**Try the earlier WebXR experience**](https://build.nebulytic.com/demos/mri/) · [**Hetzner build page**](https://build.nebulytic.com/) · [**Individual renders**](docs/renders/README.md) · [**44 style concepts**](docs/design-studies/README.md) · [**Physics and receiver audit**](docs/PHYSICS.md)
 
-The WebXR link is the earlier browser implementation with a different specimen and UI; this repository contains the native Unity project. The build page and [Quest 0.9.3 APK](https://build.nebulytic.com/dl/resonance-quest/Resonance-MRI-Quest-0.9.3.apk) / [Windows 0.9.3 ZIP](https://build.nebulytic.com/dl/resonance-quest/Resonance-MRI-Windows-0.9.3.zip) currently require the host's login. Public source access here requires no build-server account.
+The WebXR link is the earlier browser implementation with a different specimen and UI; this repository contains the native Unity project. The build page and [Quest 0.9.4 APK](https://build.nebulytic.com/dl/resonance-quest/Resonance-MRI-Quest-0.9.4.apk) / [Windows 0.9.4 ZIP](https://build.nebulytic.com/dl/resonance-quest/Resonance-MRI-Windows-0.9.4.zip) currently require the host's login. Public source access here requires no build-server account. The [GitHub 0.9.4 release](https://github.com/ajinkyagorad/Resonance-MRI/releases/tag/v0.9.4) includes a release-signed inspection APK and the Windows package.
 
 ## What is implemented
 
@@ -27,6 +27,16 @@ The current reconstruction has limited visible signal coverage and contrast. Vis
 | Acquired k-space and image | Current reconstructed volume |
 |---|---|
 | ![Measured data](docs/renders/07-kspace-and-image.png) | ![Current reconstruction](docs/renders/08-reconstructed-volume.png) |
+
+## New in 0.9.4
+
+Drag the narration timeline, move between sections without replaying a chapter, and choose **1× / 2× / 4×** playback with speech pitch preserved. Paused navigation stays paused. On desktop, use comma/period for sections and S for rate.
+
+The single-spin example keeps all **288 sample moments** visible as translucent context, anchors its marker to the chosen sample, and gives transverse phase projections a different size and opacity. The information card includes a GitHub link. [Revision details](Docs/AI/Revision-0.9.4.md).
+
+| Current playback controls | Single-spin volume context |
+|---|---|
+| ![Actual 0.9.4 controls](docs/renders/0.9.4/playback-controls.png) | ![Actual 0.9.4 lattice](docs/renders/0.9.4/single-spin-and-phase.png) |
 
 ## Build or work with an AI coding agent
 
@@ -51,7 +61,7 @@ bash Tools/build-public.sh windows
 bash Tools/build-public.sh render
 ```
 
-The wrapper uses the real project's build/export entry points and stores results in `Builds/` and `validation/`. Run only one Unity Editor against a project directory. The older server scripts remain as historical automation and contain installation-specific paths. For fresh Windows-only setup, run `ResonanceBuild.Configure` once before `ResonanceBuild.BuildWindows`.
+On headless Linux the wrapper uses graphics under xvfb; Android builds require graphics to retain the Vulkan XR boot settings. The wrapper uses the real project's build/export entry points and stores results in `Builds/` and `validation/`. Run only one Unity Editor against a project directory. The older server scripts remain as historical automation and contain installation-specific paths. For fresh Windows-only setup, run `ResonanceBuild.Configure` once before `ResonanceBuild.BuildWindows`.
 
 The simulation core is in `Assets/Resonance/Runtime/Sim/`; spatial views and interactions in `Assets/Resonance/Runtime/Scene/`; shaders in `Assets/Resonance/Shaders/`; lesson data and both voices in `Assets/Resources/`; build / validation tools in `Assets/Resonance/Editor/`. [The existing transcript](Docs/AI/TRANSCRIPT-0.9.3.md) and [model limits](Docs/AI/Revision-0.9.3.md) are included.
 
@@ -66,15 +76,15 @@ The simulation core is in `Assets/Resonance/Runtime/Sim/`; spatial views and int
 - [ ] **Relaxation and material effects:** distinguish T1, T2 and T2*, susceptibility / chemical shift, molecular motion and RF loading.
 - [ ] **Reconstruction and experimentation:** improve coverage / contrast, show slice width versus spacing, and provide a clearly bounded sandbox for protocol and specimen changes.
 - [ ] **Device and release work:** physical Quest profiling and controller checks, readable narration controls, Horizon App ID / release signing and Store validation.
-- [ ] **In-app source access:** a GitHub link in the existing information area.
+- [x] **In-app source access:** a GitHub link in the existing information area.
 
 See [the detailed roadmap and acceptance criteria](docs/ROADMAP.md). These are planned improvements; publication does not claim they are finished.
 
 ## Validation and status
 
-The 0.9.3 server reports record **66 numerical checks, 95 runtime checks and 53 APK checks**, with successful Quest and Windows builds. [Baseline evidence](docs/validation/README.md) is included. Render export is a separate headless-Editor operation; Linux Editor OVRPlugin and SearchDatabase environment warnings are documented separately from application checks.
+The 0.9.4 reports record **95 runtime checks, 33 playback checks and 60 APK checks**, with successful Quest and Windows builds. The unchanged simulation core passed **66 numerical checks** from a fresh public clone. [Versioned evidence](docs/validation/README.md) and the 0.9.3 reports are included. Render export is a separate headless-Editor operation; Linux Editor OVRPlugin and SearchDatabase environment warnings are documented separately from application checks.
 
-Physical headset readability, controller alignment and sustained frame rate still require device testing. The current APK is a preview, and no Horizon Store approval is claimed. The current mixed MR / VR implementation uses contextual boundary suppression; this must be validated on a supported Quest runtime.
+Physical headset readability, controller alignment and sustained frame rate still require device testing. The current APK is a preview, and no Horizon Store approval is claimed. [Horizon submission preparation](docs/HORIZON.md) records artwork, account setup and device validation. Passthrough must work without asking the user to draw or enable a play boundary where the platform supports it. The mixed MR / VR implementation uses contextual boundary suppression and restores boundary behavior for opaque VR; this must be validated on a supported Quest runtime. Official Touch Plus models are used with controller help off by default, focus-loss release and input animation; physical alignment and haptics remain device checks.
 
 ## License and credits
 

@@ -10,6 +10,8 @@ namespace Nebulytic.Resonance
     {
         readonly App app;
         readonly Mesh visibleMesh = new Mesh { name="Visible moment lattice" };
+        readonly Mesh phaseMesh = new Mesh { name="Transverse phase projections" };
+        Vector3[] phasePoints,phaseNormals; Color[] phaseColours;
         readonly Mesh latticeMesh = new Mesh { name="Persistent sample lattice" };
         Vector3[] meshPoints,meshNormals,needlePoints,needleNormals; Color[] meshColours; int[] meshIndices,needleIndices;
         readonly TextMeshPro heading,example,sourceA,sourceB,sumCaption; readonly Transform sumVector;
@@ -55,8 +57,10 @@ namespace Nebulytic.Resonance
             this.app = app;
             Root = new GameObject("Proton block").transform; Root.SetParent(parent, false);
             needle = MeshKit.Needle(0.07f, 0.17f, 0.20f,12,16); ring = SpinRing(); opaque = Mats.Needle(false); faded = Mats.Needle(true);
-            var gridMat=Mats.Needle(false); gridMat.enableInstancing=false; gridMat.SetFloat("_VertexTint",1);
+            var gridMat=Mats.Needle(true); gridMat.enableInstancing=false; gridMat.SetFloat("_VertexTint",1);
             visibleMesh.MarkDynamic(); Mats.Object("Visible moments",Root,visibleMesh,gridMat);
+            phaseMesh.MarkDynamic(); var phaseMat=Mats.Needle(true); phaseMat.enableInstancing=false; phaseMat.SetFloat("_VertexTint",1); phaseMat.renderQueue=3003;
+            Mats.Object("Transverse phase projections",Root,phaseMesh,phaseMat);
             Mats.Object("Persistent lattice",Root,latticeMesh,Mats.Line(Look.Hex(0x7FA6B9),false,0.25f));
             needlePoints=needle.vertices; needleNormals=needle.normals; needleIndices=needle.triangles;
             Vector3 size = DisplaySize, half = size / 2; float mm = 0.001f * Look.BlockMagnification;
@@ -120,7 +124,10 @@ namespace Nebulytic.Resonance
             sourceB=Labels.Make(Root,"B",Frames.ToS(Layouts.BlockX/12,Layouts.BlockY/4,Layouts.BlockZ/16)*Look.BlockMagnification+Vector3.up*0.025f,Look.ValueSize,Look.TEXT);
             example=Labels.Make(Root,"",new Vector3(0,half.y+0.13f,0),Look.ValueSize,Look.TEXT,TextAlignmentOptions.Center,0.7f);
             // The selected proton's halo.
-            halo = Mats.Object("Selected proton halo", Root, MeshKit.Torus(0.5f, 0.03f, 48, 6), Mats.Solid(Look.MAG)).transform; haloRenderer = halo.GetComponent<Renderer>(); haloRenderer.enabled = false;
+            var focus=new LineBuilder();
+            for(int j=0;j<48;j++) if(j%12<9) { float a=j*Mathf.PI/24,b=(j+1)*Mathf.PI/24; focus.Segment(new Vector3(Mathf.Cos(a)*0.5f,0,Mathf.Sin(a)*0.5f),new Vector3(Mathf.Cos(b)*0.5f,0,Mathf.Sin(b)*0.5f),0.0018f,Color.white); }
+            var focusMat=Mats.Line(Look.TEXT,false,0.38f,true); focusMat.SetFloat("_ScaleWidth",0);
+            halo = Mats.Object("Selected proton halo", Root, focus.Commit(new Mesh {name="Open focus halo"}),focusMat).transform; haloRenderer = halo.GetComponent<Renderer>(); haloRenderer.enabled = false;
             var col = Root.gameObject.AddComponent<BoxCollider>(); col.size = size; col.isTrigger = true;
             Root.gameObject.AddComponent<Grabbable>().Kind = "cube";
             app.Attention.Resolvers["spins."] = SpinAnchor;
@@ -199,7 +206,7 @@ namespace Nebulytic.Resonance
             for (int i = 0; i < c.N; i++)
             {
                 if (c.Pd[i] <= 0 || c.Shift[i] != 0 || c.R2[i] > 1 / 0.005) continue;
-                double sc = System.Math.Abs(s.CubeDfSlice[i]) / System.Math.Max(1, s.P.BandwidthEff) + 0.05 * localPos[i].magnitude / Spacing;
+                double sc = localPos[i].sqrMagnitude + 0.000001 * System.Math.Abs(s.CubeDfSlice[i]) / System.Math.Max(1, s.P.BandwidthEff);
                 if (sc < score) { score = sc; best = i; }
             }
             if (best < 0) for (int i = 0; i < c.N; i++) if (c.Pd[i] > 0) { best = i; break; }
@@ -350,13 +357,13 @@ namespace Nebulytic.Resonance
             Matrix4x4 P = Root.localToWorldMatrix;
             Vector3 px = new Vector3(P.m00, P.m10, P.m20), py = new Vector3(P.m01, P.m11, P.m21), pz = new Vector3(P.m02, P.m12, P.m22);
             float scale=app.Demonstrating && app.Demo.StartsWith("single")?2.5f:app.Demonstrating && (app.Demo.StartsWith("pair")||app.Demo=="recover")?2:1;
-            float L = 0.72f * D*scale, thick = 0.75f * D*scale, ringR = 0.17f * D; int drawn = 0;
+            float L = 0.72f * D, thick = 0.60f * D, ringR = 0.17f * D; int drawn = 0;
             for (int i = 0; i < n; i++)
             {
                 Vector3 lp = localPos[i];
                 Vector3 w = new Vector3(P.m03 + px.x * lp.x + py.x * lp.y + pz.x * lp.z, P.m13 + px.y * lp.x + py.y * lp.y + pz.y * lp.z, P.m23 + px.z * lp.x + py.z * lp.y + pz.z * lp.z);
                 worldPos[i] = w;
-                if ((!present[i] && !app.Demonstrating) || (app.Demonstrating && app.Demo.StartsWith("single") && i!=Selected)) { kind[i] = 0; continue; }
+                if (!present[i] && !app.Demonstrating) { kind[i] = 0; continue; }
                 float target = all || member[i] ? 1 : 0;
                 float e = emph[i] += (target - emph[i]) * ke;
                 bool solid = e >= 0.985f;
@@ -368,7 +375,8 @@ namespace Nebulytic.Resonance
                 Vector3 u = Vector3.Cross(a, d).normalized, v = Vector3.Cross(u, d);
                 Vector3 cu = (px * u.x + py * u.y + pz * u.z), cd = (px * d.x + py * d.y + pz * d.z), cv = (px * v.x + py * v.y + pz * v.z);
                 var M = new Matrix4x4();
-                M.SetColumn(0, cu * thick); M.SetColumn(1, cd * L * ((app.EnsembleMoments || app.Demonstrating) ? Mathf.Clamp01(NetM(i).magnitude) : 1)); M.SetColumn(2, cv * thick); M.SetColumn(3, new Vector4(w.x, w.y, w.z, 1));
+                float emphasisScale=app.Demonstrating && app.Demo.StartsWith("single") && i==Selected ? 1.5f : 1;
+                M.SetColumn(0, cu * thick * (i==Selected?1.1f:1)); M.SetColumn(1, cd * L * emphasisScale * ((app.EnsembleMoments || app.Demonstrating) ? Mathf.Clamp01(NetM(i).magnitude) : 1)); M.SetColumn(2, cv * thick); M.SetColumn(3, new Vector4(w.x, w.y, w.z, 1));
                 matrices[i] = M;
                 // The ring turns about the moment: rotate the basis about d by the spin angle.
                 float sp = spinPhase[i] + spinClock, cs = Mathf.Cos(sp), sn = Mathf.Sin(sp);
@@ -378,7 +386,8 @@ namespace Nebulytic.Resonance
                 ringMats[i] = R; kind[i] = (byte)((app.EnsembleMoments || app.Demonstrating) && NetM(i).sqrMagnitude<1e-10f ? 0 : 1);
                 // Colour: phase as hue, tip as brightness. Named protons opaque; the others fade by opacity only.
                 var c = app.PhaseColour ? Look.Phase(phaseNow[i], Look.TipBrightness(theta)) : Color.Lerp(Look.B0, Look.RF, (float)System.Math.Sin(theta));
-                tints[i] = new Vector4(c.r, c.g, c.b, solid ? 1 : 0.42f + 0.58f * e);
+                float opacity=app.Demonstrating && app.Demo.StartsWith("single") ? (i==Selected?0.95f:0.16f) : i==Selected?0.92f:app.PhaseColour?0.50f:0.70f;
+                tints[i] = new Vector4(c.r, c.g, c.b, opacity*(0.4f+0.6f*e));
                 drawn++;
             }
             DrawnNeedles = drawn;
@@ -386,7 +395,7 @@ namespace Nebulytic.Resonance
             // The selected proton's halo, facing the eye.
             if (Selected >= 0 && Selected < n && present[Selected])
             {
-                haloRenderer.enabled = !app.Demonstrating; halo.position = worldPos[Selected];
+                haloRenderer.enabled = true; halo.position = worldPos[Selected];
                 halo.rotation = Quaternion.LookRotation(app.Eye - halo.position) * Quaternion.Euler(90, 0, 0);
                 halo.localScale = Vector3.one * (0.9f * D);
             }
@@ -414,8 +423,8 @@ namespace Nebulytic.Resonance
             TickGradient(s, sim);
             tissue.Tick(s, sim);
             if(!app.Demonstrating) { heading.transform.localPosition=new Vector3(0,DisplaySize.y/2+0.18f,0); example.transform.localPosition=new Vector3(0,DisplaySize.y/2+0.13f,0); }
-            Labels.Set(heading,app.Demonstrating ? (app.Demo.StartsWith("single")?"Single hydrogen spin · expectation vector":"Ideal sample · 6 × 6 × 8 moments") : "Tissue · 6 × 6 × 8 sample locations");
-            Labels.Set(example,app.Demo switch {"single"=>"f₀ = γ̄ B₀ · precession slowed", "singleRF"=>"B₁ on resonance · α = γ ∫B₁ dt", "uniform"=>"Same field + same material → same response", "t1"=>"T₁ = 0.8 s · Mz / M₀ = 1 − exp(−t/T₁)", "t2"=>"T₂ = 0.10 s · Mxy / M₀ = exp(−t/T₂)", "mixture"=>"Two materials · different relaxation and Δf", "slice"=>"Gz + RF bandwidth → excited slab", "gx"=>"Gx on · Δf(x) = γ̄ Gx x", "gy"=>"Gy on · Δφ(y) = γ Gy y Δt", "gyHold"=>"Gy off · phase differences remain", "pair0"=>"Same x · two y positions · S₀ = A + B = 1.1", "pair1"=>"Second encoding · S₁ → A − B = 0.5", "recover"=>"A = (S₀ + S₁)/2 = 0.8 · B = (S₀ − S₁)/2 = 0.3", _=>""});
+            Labels.Set(heading,app.Demonstrating ? (app.Demo.StartsWith("single")?"Selected hydrogen · expectation vector in its sample":"Ideal sample · 6 × 6 × 8 moments") : "Tissue · 6 × 6 × 8 sample locations");
+            Labels.Set(example,app.Demo switch {"single"=>"f₀ = γ̄ B₀ · precession slowed", "singleRF"=>"B₁ on resonance · α = γ ∫B₁ dt", "uniform"=>"Same field + same material → same response", "t1"=>"T₁ = 0.8 s · Mz / M₀ = 1 − exp(−t/T₁)", "t2"=>"T₂ = 0.10 s · Mxy / M₀ = exp(−t/T₂)", "mixture"=>"Two materials · different relaxation and Δf", "slice"=>"Gz + RF bandwidth → excited slab", "gx"=>"Gx on · Δf(x) = γ̄ Gx x", "gy"=>"Gy on · Δφ(y) = γ Gy y Δt", "gyHold"=>"Gy off · phase differences remain", "pair0"=>"Same x · two y positions · S₀ = A + B = 1.1", "pair1"=>"Second encoding · S₁ → A − B = 0.5", "recover"=>"A = (S₀ + S₁)/2 = 0.8 · B = (S₀ − S₁)/2 = 0.3", _=>app.PhaseColour?"Broad: moment · thin: transverse phase (display scales)":"Moments anchored at sample positions"});
             bool paired=app.Demo=="pair0"||app.Demo=="pair1"||app.Demo=="recover";
             sumCaption.gameObject.SetActive(paired); sourceA.gameObject.SetActive(paired); sourceB.gameObject.SetActive(paired); sumVector.gameObject.SetActive(paired);
             if(paired) { double ph=app.Demo=="recover"?System.Math.PI:app.Demo=="pair1"?System.Math.PI*app.DemoProgress:0; var sum=Frames.ToS(0.8+0.3*System.Math.Cos(ph),-0.3*System.Math.Sin(ph),0); sumVector.position=Root.position-app.HeadCamera.transform.right*(0.43f*Root.lossyScale.x); sumCaption.transform.position=sumVector.position-app.HeadCamera.transform.up*0.08f; sumVector.rotation=Quaternion.FromToRotation(Vector3.up,(app.HeadCamera.transform.right*(float)(0.8+0.3*System.Math.Cos(ph))-app.HeadCamera.transform.up*(float)(0.3*System.Math.Sin(ph))).normalized); sumVector.localScale=new Vector3(0.08f,0.12f*sum.magnitude,0.08f); }
@@ -483,10 +492,26 @@ namespace Nebulytic.Resonance
             }
             var inv=Root.worldToLocalMatrix;
             for(int i=0;i<n;i++) {
-                var m=inv*matrices[i]; var normal=m.inverse.transpose; Color c=tints[i]; c.a=1;
+                var m=inv*matrices[i]; var normal=m.inverse.transpose; Color c=tints[i];
                 for(int j=0;j<nv;j++) { int k=i*nv+j; meshPoints[k]=kind[i]==0?localPos[i]:m.MultiplyPoint3x4(needlePoints[j]); meshNormals[k]=normal.MultiplyVector(needleNormals[j]).normalized; meshColours[k]=c; }
             }
             visibleMesh.vertices=meshPoints; visibleMesh.normals=meshNormals; visibleMesh.colors=meshColours;
+            // Thin, shorter transverse projections make phase readable beside the larger full moment.
+            if(!app.PhaseColour)phaseMesh.Clear();
+            else {
+                if(phasePoints==null || phasePoints.Length!=n*nv) { phasePoints=new Vector3[n*nv];phaseNormals=new Vector3[n*nv];phaseColours=new Color[n*nv]; }
+                for(int i=0;i<n;i++) {
+                    var d=MomentDir(i,app.DisplayCarrier); d.z=0;
+                    float amp=d.magnitude;
+                    var m=Matrix4x4.TRS(localPos[i],Quaternion.FromToRotation(Vector3.up,amp>1e-4f?Frames.ToS(d.x,d.y,0).normalized:Vector3.up),
+                        new Vector3(Spacing*0.26f,Spacing*0.48f*amp,Spacing*0.26f));
+                    var normal=m.inverse.transpose; var colour=Look.Phase(phaseNow[i],1); colour.a=app.Demonstrating && app.Demo.StartsWith("single") && i!=Selected ? 0.25f : 0.72f;
+                    for(int j=0;j<nv;j++) { int k=i*nv+j; phasePoints[k]=kind[i]==0||amp<1e-4f?localPos[i]:m.MultiplyPoint3x4(needlePoints[j]); phaseNormals[k]=normal.MultiplyVector(needleNormals[j]).normalized;phaseColours[k]=colour; }
+                }
+                phaseMesh.indexFormat=UnityEngine.Rendering.IndexFormat.UInt32;
+                phaseMesh.vertices=phasePoints;phaseMesh.triangles=meshIndices;phaseMesh.normals=phaseNormals;phaseMesh.colors=phaseColours;
+                phaseMesh.bounds=new Bounds(Vector3.zero,DisplaySize+Vector3.one*0.15f);
+            }
             visibleMesh.bounds=new Bounds(Vector3.zero,DisplaySize+Vector3.one*0.15f);
         }
     }

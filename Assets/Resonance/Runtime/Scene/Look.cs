@@ -58,7 +58,7 @@ namespace Nebulytic.Resonance
         public const float SignalAz = -28, SignalEl = -18, SignalDist = 1.02f;
         public const float SequenceAz = 0, SequenceEl = -17, SequenceDist = 1.0f;
         public const float DataAz = 28, DataEl = -18, DataDist = 1.02f;
-        public const float StripAz = 0, StripEl = -39.5f, StripDist = 0.80f, StripScale = 1.0f;
+        public const float StripAz = 0, StripEl = -37.25f, StripDist = 0.80f, StripScale = 1.0f;
         /// <summary>Uniform magnification of the proton block (5 x 5 x 10 mm shown as 0.25 x 0.25 x 0.5 m).</summary>
         public const float BlockMagnification = 50;
         // Field lines: brightness scale of the |B| deviation (a gradient's ramp).

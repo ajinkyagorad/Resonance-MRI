@@ -16,7 +16,7 @@ if not key.exists():
  if result.returncode:raise SystemExit('Release key generation failed; credentials were not printed.')
  key.chmod(0o600)
 assert key.is_file() and password.is_file()
-VERSION='0.8.4'
+VERSION='0.9.4'
 source=root/(f'Builds/Resonance-MRI-Horizon-{VERSION}-unsigned.apk' if store_mode else f'Builds/Resonance-MRI-Quest-{VERSION}.apk')
 target=root/(f'Builds/Resonance-MRI-Horizon-{VERSION}.apk' if store_mode else f'.pipeline/horizon-release/Resonance-MRI-Release-Preview-{VERSION}.apk')
 target.parent.mkdir(parents=True,exist_ok=True)

@@ -1,0 +1,17 @@
+Verifies
+Verified using v1 scheme (JAR signing): false
+Verified using v2 scheme (APK Signature Scheme v2): true
+Verified using v3 scheme (APK Signature Scheme v3): true
+Verified using v3.1 scheme (APK Signature Scheme v3.1): false
+Verified using v4 scheme (APK Signature Scheme v4): false
+Verified for SourceStamp: false
+Number of signers: 1
+Signer #1 certificate DN: CN=Resonance MRI, O=Nebulytic
+Signer #1 certificate SHA-256 digest: 929f7155d424d6b82100982fd26a9d5e33ddd8b04c797465b56ad6d395c6a76f
+Signer #1 certificate SHA-1 digest: 0c0ac78b48ae4ac471e92a6cde0a2c4fd0b22814
+Signer #1 certificate MD5 digest: eb74a6a65d990f5db5f1f7b0ca8a1fe4
+Signer #1 key algorithm: RSA
+Signer #1 key size (bits): 3072
+Signer #1 public key SHA-256 digest: f89ba7395cd48390fef15456985b078cb0a840b9ce60d46f3e12090ed9d67556
+Signer #1 public key SHA-1 digest: 10dc62e9efceaac91a2365b08541941d07680964
+Signer #1 public key MD5 digest: 9ee54e349de929815dc7c0821fd70fc3
