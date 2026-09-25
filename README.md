@@ -6,7 +6,7 @@ An open-source, spatial MRI teaching experience built in Unity for **Meta Quest 
 
 ![Actual Unity-rendered elements on white](docs/renders/MRI-rendered-elements-white-0.9.3.png)
 
-[**Try the earlier WebXR experience**](https://build.nebulytic.com/demos/mri/) · [**Hetzner build page**](https://build.nebulytic.com/) · [**Individual renders**](docs/renders/README.md) · [**Physics and receiver audit**](docs/PHYSICS.md)
+[**Try the earlier WebXR experience**](https://build.nebulytic.com/demos/mri/) · [**Hetzner build page**](https://build.nebulytic.com/) · [**Individual renders**](docs/renders/README.md) · [**44 style concepts**](docs/design-studies/README.md) · [**Physics and receiver audit**](docs/PHYSICS.md)
 
 The WebXR link is the earlier browser implementation with a different specimen and UI; this repository contains the native Unity project. The build page and [Quest 0.9.3 APK](https://build.nebulytic.com/dl/resonance-quest/Resonance-MRI-Quest-0.9.3.apk) / [Windows 0.9.3 ZIP](https://build.nebulytic.com/dl/resonance-quest/Resonance-MRI-Windows-0.9.3.zip) currently require the host's login. Public source access here requires no build-server account.
 
@@ -62,7 +62,7 @@ The simulation core is in `Assets/Resonance/Runtime/Sim/`; spatial views and int
 - [ ] **Receiver audit and visualization:** distinguish analog front end, ADC, FPGA NCO / mixer / CIC, host FIR / decimation, clocks and signal units. Document each chosen architecture and parameter against primary sources.
 - [ ] **Voxel encoding:** show two locations sharing x but differing in y, the summed signal, successive Gy phase encodes, k-space accumulation and inverse reconstruction together.
 - [ ] **Synchronization and visibility:** keep hand ROI, slab, lattice, molecule, axes, fields and plots linked; verify readable depth and placement on Quest.
-- [ ] **Design studies:** four calm alternatives for each rendered component—minimalist, fully informative, advanced aesthetics and elegant—reviewed separately from implemented screenshots.
+- [x] **Design studies:** four calm alternatives for each rendered component—minimalist, fully informative, advanced aesthetics and elegant—reviewed separately from implemented screenshots.
 - [ ] **Relaxation and material effects:** distinguish T1, T2 and T2*, susceptibility / chemical shift, molecular motion and RF loading.
 - [ ] **Reconstruction and experimentation:** improve coverage / contrast, show slice width versus spacing, and provide a clearly bounded sandbox for protocol and specimen changes.
 - [ ] **Device and release work:** physical Quest profiling and controller checks, readable narration controls, Horizon App ID / release signing and Store validation.
