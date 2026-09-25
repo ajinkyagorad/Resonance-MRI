@@ -1,0 +1,14 @@
+[
+  {
+    "case": "reject_previous_preferExternal",
+    "passed": true
+  },
+  {
+    "case": "accept_rebuilt_auto",
+    "passed": true
+  },
+  {
+    "case": "reject_missing",
+    "passed": true
+  }
+]

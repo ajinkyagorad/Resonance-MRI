@@ -1,6 +1,6 @@
 using System;using System.IO;using System.Linq;using Nebulytic.Resonance;using UnityEditor;using UnityEditor.Build;using UnityEditor.Build.Reporting;using UnityEditor.SceneManagement;using UnityEditor.XR.Management;using UnityEditor.XR.Management.Metadata;using UnityEditor.XR.OpenXR.Features;using UnityEngine;using UnityEngine.Rendering;using UnityEngine.XR.Management;using UnityEngine.XR.OpenXR;using UnityEngine.XR.OpenXR.Features;using UnityEngine.XR.OpenXR.Features.Interactions;
 public static class ResonanceBuild {
- public const string ScenePath="Assets/Scenes/Resonance.unity";public const string Version="0.9.4";public const int VersionCode=17;
+ public const string ScenePath="Assets/Scenes/Resonance.unity";public const string Version="0.9.5";public const int VersionCode=18;
  public static void Configure(){
  PrepareMathFont();EditorSettings.serializationMode=SerializationMode.ForceText;Directory.CreateDirectory("Assets/Scenes");Directory.CreateDirectory("Assets/XR/Settings");Directory.CreateDirectory("Builds");
  var group=BuildTargetGroup.Android;
@@ -17,6 +17,7 @@ public static class ResonanceBuild {
  EditorUtility.SetDirty(xr);EditorUtility.SetDirty(settings);EditorUtility.SetDirty(perTarget);
  PlayerSettings.companyName="Nebulytic";PlayerSettings.productName="Resonance MRI";PlayerSettings.SetApplicationIdentifier(NamedBuildTarget.Android,"com.nebulytic.resonance");PlayerSettings.bundleVersion=Version;PlayerSettings.Android.bundleVersionCode=VersionCode;
  PlayerSettings.SplashScreen.show=false;PlayerSettings.Android.applicationEntry=AndroidApplicationEntry.GameActivity;PlayerSettings.SetScriptingBackend(NamedBuildTarget.Android,ScriptingImplementation.IL2CPP);
+ PlayerSettings.Android.preferredInstallLocation=AndroidPreferredInstallLocation.Auto;
  PlayerSettings.Android.targetArchitectures=AndroidArchitecture.ARM64;PlayerSettings.Android.minSdkVersion=AndroidSdkVersions.AndroidApiLevel32;PlayerSettings.Android.targetSdkVersion=AndroidSdkVersions.AndroidApiLevel34;
  PlayerSettings.defaultInterfaceOrientation=UIOrientation.LandscapeLeft;PlayerSettings.colorSpace=ColorSpace.Linear;PlayerSettings.SetUseDefaultGraphicsAPIs(BuildTarget.Android,false);PlayerSettings.SetGraphicsAPIs(BuildTarget.Android,new[]{GraphicsDeviceType.Vulkan});
  PlayerSettings.gpuSkinning=true;PlayerSettings.MTRendering=true;PlayerSettings.graphicsJobs=false;PlayerSettings.enableFrameTimingStats=true;PlayerSettings.runInBackground=true;PlayerSettings.SetManagedStrippingLevel(NamedBuildTarget.Android,ManagedStrippingLevel.Low);PlayerSettings.stripEngineCode=false;

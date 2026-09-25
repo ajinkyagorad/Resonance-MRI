@@ -1,7 +1,7 @@
 """APK identity, manifest policy, signing, packaging and packed-asset checks for the current Quest preview."""
 from pathlib import Path
 import subprocess, json, zipfile, hashlib, os, re
-VERSION, CODE = '0.9.4', 17
+VERSION, CODE = '0.9.5', 18
 r = Path(__file__).resolve().parents[1]; apk = r / f'Builds/Resonance-MRI-Quest-{VERSION}.apk'
 sdk = Path('/home/triton/Unity/Hub/Editor/6000.5.5f1/Editor/Data/PlaybackEngines/AndroidPlayer')
 aapt = sdk / 'SDK/build-tools/36.0.0/aapt2'; signer = sdk / 'SDK/build-tools/36.0.0/apksigner'
@@ -14,6 +14,9 @@ def check(name, ok): checks[name] = bool(ok)
 check('package_identity', "package: name='com.nebulytic.resonance'" in badging)
 check(f'version_code_{CODE}', f"versionCode='{CODE}'" in badging)
 check('version_' + VERSION.replace('.', ''), f"versionName='{VERSION}'" in badging)
+install = re.search(r'(?m)^\s*A: [^\n]*:installLocation\([^)]*\)=(.+)$', manifest)
+install_value = re.sub(r'^\(type [^)]*\)', '', install.group(1)).strip() if install else ''
+check('install_location_auto', install_value in ('0', '0x0', '"auto"'))
 check('minimum_sdk_32', "minSdkVersion:'32'" in badging)
 check('target_sdk_34', "targetSdkVersion:'34'" in badging)
 check('arm64_only', "native-code: 'arm64-v8a'" in badging and 'armeabi-v7a' not in badging)

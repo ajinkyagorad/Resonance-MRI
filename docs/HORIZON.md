@@ -2,7 +2,7 @@
 
 Store title: **Resonance MRI**. Proposed price: **Free**. This is an educational simulation for Quest 3 / 3S; supported-device declarations remain subject to physical testing.
 
-The local submission package contains a release-signed 0.9.4 inspection APK, paste-ready listing, artwork, five real runtime screenshots, a 39.8-second H.264/AAC trailer, privacy and attribution documents, and validation evidence.
+The local submission package contains a release-signed 0.9.5 inspection APK (version code 18, installLocation=auto), paste-ready listing, artwork, five real runtime screenshots, a 39.8-second H.264/AAC trailer, privacy and attribution documents, and validation evidence.
 
 ![Branded cover composed from actual Unity geometry](store/cover-landscape-2560x1440.png)
 
@@ -36,3 +36,7 @@ Current official references, checked 25 September 2026:
 - [Meta asset design guidelines](https://developers.meta.com/horizon/resources/asset-guidelines/)
 - [App metadata](https://developers.meta.com/horizon/resources/publish-app-metadata/)
 - [Android manifest requirements](https://developers.meta.com/horizon/resources/publish-mobile-manifest/)
+
+## Manifest correction
+
+Use the [0.9.5 Quest APK](https://github.com/ajinkyagorad/Resonance-MRI/releases/tag/v0.9.5) for further preparation. [Final APK manifest evidence](validation/0.9.5/apk-manifest.txt) records installLocation=0. Store media remains the actual 0.9.4 imagery because runtime content is unchanged.

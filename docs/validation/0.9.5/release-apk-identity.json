@@ -1,0 +1,18 @@
+{
+  "app_name": "Resonance MRI",
+  "package": "com.nebulytic.resonance",
+  "version_name": "0.9.5",
+  "version_code": 18,
+  "artifact": "Resonance-MRI-Release-Preview-0.9.5.apk",
+  "sha256": "76f3a46af1736b1e2325ca317e11ba67817cb454186fc5f346e4e8e1957a330c",
+  "bytes": 77527124,
+  "certificate_sha256": "929f7155d424d6b82100982fd26a9d5e33ddd8b04c797465b56ad6d395c6a76f",
+  "release_signed": true,
+  "store_configured": false,
+  "meta_app_id": null,
+  "payload_matches_validated_preview": true,
+  "physical_quest_tested": false,
+  "store_submitted": false,
+  "install_location": "auto",
+  "install_location_binary": 0
+}
