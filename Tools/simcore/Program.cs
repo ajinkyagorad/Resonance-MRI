@@ -22,7 +22,7 @@ static class SimCore
         string cmd = args.Length > 0 ? args[0] : "test";
         if (!File.Exists(Path.Combine(Root, "Assets/Resonance/Runtime/Sim/Coils.cs"))) { Console.Error.WriteLine("Root not found: " + Root); return 2; }
         if (cmd == "bake") return Bake();
-        if (cmd == "test") return Test(args.Skip(1).ToArray());
+        if (cmd == "test") { Directory.CreateDirectory(Path.Combine(Root, "validation")); return Test(args.Skip(1).ToArray()); }
         if (cmd == "derive") return Derive();
         if (cmd == "bench") return Bench(args.Skip(1).ToArray());
         Console.Error.WriteLine("usage: bake | test | derive | bench [threads]"); return 2;
