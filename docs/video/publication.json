@@ -1,0 +1,17 @@
+{
+  "video_id": "jU3K3tr13xE",
+  "url": "https://www.youtube.com/watch?v=jU3K3tr13xE",
+  "requested_privacy": "unlisted",
+  "returned_status": {
+    "uploadStatus": "uploaded",
+    "privacyStatus": "unlisted",
+    "license": "youtube",
+    "embeddable": true,
+    "publicStatsViewable": true,
+    "selfDeclaredMadeForKids": false
+  },
+  "title": "How MRI Works in 3D | Spins, RF Pulses, k-Space & Images \u2014 Resonance MRI",
+  "sha256": "0a479b81c53e5c980d6054b6e31e2ae694cdf600afbd4afead0649d7d8bb7c75",
+  "bytes": 258983936,
+  "channel_id": "UCTmKKgHQdMwUKZL5YekHskA"
+}

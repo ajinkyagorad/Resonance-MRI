@@ -1,10 +1,12 @@
 # Resonance MRI — complete 3D film
 
-The complete narrated lesson is rendered from the actual Unity 0.9.5 simulation, with a neutral background, camera shots focused on the named exhibit, English captions, and Nebulytic opening and closing graphics.
+The complete narrated lesson is rendered from the actual Unity 0.9.5 simulation, with a neutral background, camera shots focused on the named exhibit, English captions in a reserved area below the lesson view, and Nebulytic opening and closing graphics.
 
 Duration: approximately 12 minutes 44 seconds. 1920 × 1080, 24 frames/second. The film covers all ten chapters and all 119 lesson cues. Its sequence includes single-spin and sample-grid examples, relaxation, RF excitation, receiver processing, gradient echoes, slice selection, readout, phase encoding, k-space, reconstruction and the simulated hand volume.
 
-![Film cover from actual Unity scanner geometry](cover.jpg)
+[![Film cover from actual Unity scanner geometry](cover.jpg)](https://www.youtube.com/watch?v=jU3K3tr13xE)
+
+[Watch the complete film on YouTube](https://www.youtube.com/watch?v=jU3K3tr13xE) · [Watch on Nebulytic](https://nebulytic.com/apps/resonance-mri/#full-lesson) · [Final-file verification](verification.json)
 
 - [Transcript](transcript.md)
 - [Timed English captions](captions.en.srt)

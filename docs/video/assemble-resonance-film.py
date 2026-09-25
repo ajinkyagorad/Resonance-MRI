@@ -72,7 +72,7 @@ def mux():
  outputs.append(P/'edit/intro.mp4')
  for ch in manifest['chapters']:
   tag=f"{ch['index']+1:02}";dest=P/f'edit/{tag}.mp4'
-  if not dest.exists():run(['ffmpeg','-v','error','-y','-i',str(P/ch['file']),'-i',str(P/f'edit/{tag}.wav'),'-vf',f'ass={P}/edit/{tag}.ass','-t',str(ch['duration']),'-c:v','libx264','-preset','veryfast','-crf','18','-threads','3','-pix_fmt','yuv420p','-c:a','aac','-b:a','192k','-ar','48000','-ac','2','-video_track_timescale','12288',str(dest)])
+  if not dest.exists():run(['ffmpeg','-v','error','-y','-i',str(P/ch['file']),'-i',str(P/f'edit/{tag}.wav'),'-vf',f'scale=1728:972,pad=1920:1080:96:0:color=0x0b1520,ass={P}/edit/{tag}.ass','-t',str(ch['duration']),'-c:v','libx264','-preset','veryfast','-crf','18','-threads','3','-pix_fmt','yuv420p','-c:a','aac','-b:a','192k','-ar','48000','-ac','2','-video_track_timescale','12288',str(dest)])
   outputs.append(dest);print('Muxed',tag,flush=True)
  outputs.append(P/'edit/outro.mp4')
  (P/'edit/concat.txt').write_text('\n'.join(f"file '{p}'" for p in outputs))

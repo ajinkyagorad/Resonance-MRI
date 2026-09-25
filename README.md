@@ -10,6 +10,12 @@ An open-source, spatial MRI teaching experience built in Unity for **Meta Quest 
 
 The WebXR link is the earlier browser implementation with a different specimen and UI; this repository contains the native Unity project. The build page and [Quest 0.9.5 APK](https://build.nebulytic.com/dl/resonance-quest/Resonance-MRI-Quest-0.9.5.apk) / [Windows 0.9.4 ZIP](https://build.nebulytic.com/dl/resonance-quest/Resonance-MRI-Windows-0.9.4.zip) currently require the host's login. Public source access here requires no build-server account. The [GitHub 0.9.5 release](https://github.com/ajinkyagorad/Resonance-MRI/releases/tag/v0.9.5) includes the corrected release-signed Quest APK. The Windows package remains in the [0.9.4 release](https://github.com/ajinkyagorad/Resonance-MRI/releases/tag/v0.9.4).
 
+## Watch the complete lesson
+
+[![Watch the 12:44 Resonance MRI film](docs/video/cover.jpg)](https://www.youtube.com/watch?v=jU3K3tr13xE)
+
+[Watch on YouTube](https://www.youtube.com/watch?v=jU3K3tr13xE) or [watch on the app page](https://nebulytic.com/apps/resonance-mri/#full-lesson). All ten chapters are rendered from the actual Unity scene with focused camera shots, narration and English captions. [Transcript, captions, production sources and validation](docs/video/README.md). The film is available by link; the Quest build remains a preview while the Meta Horizon release is prepared.
+
 ## What is implemented
 
 - Exposed main magnet, gradient windings, transmit birdcage and independent receive surface loop.

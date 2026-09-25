@@ -1,0 +1,29 @@
+{
+  "verified_at": "2026-09-25T20:57:24.801141+00:00",
+  "sha256": "0a479b81c53e5c980d6054b6e31e2ae694cdf600afbd4afead0649d7d8bb7c75",
+  "bytes": 258983936,
+  "duration_seconds": 763.604329,
+  "video": {
+    "width": 1920,
+    "height": 1080,
+    "fps": "24/1",
+    "frames": "18326"
+  },
+  "audio": {
+    "codec": "aac",
+    "sample_rate": "48000",
+    "channels": 2,
+    "integrated_lufs": -16.42,
+    "true_peak_dbtp": -4.15
+  },
+  "whole_file_decode": "passed; no ffmpeg errors",
+  "chapters": 10,
+  "narration_cues": 119,
+  "qr_destination": "https://nebulytic.com/apps/resonance-mri/",
+  "qr_render_decode": "passed",
+  "visual_review": "Sampled chapter contact sheets, intro and outro; reserved caption space below lesson viewport; chapter 6 final clearance checked. Existing teaching-model limitations documented in docs/video/README.md.",
+  "capture_source": "b511bbf",
+  "public_source_baseline": "3bc779a",
+  "headset_capture": false,
+  "store_status": "Quest preview; Meta Horizon listing pending"
+}
