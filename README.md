@@ -6,7 +6,7 @@ An open-source, spatial MRI teaching experience built in Unity for **Meta Quest 
 
 ![Actual Unity-rendered elements on white](docs/renders/MRI-rendered-elements-white-0.9.3.png)
 
-[**Try the earlier WebXR experience**](https://build.nebulytic.com/demos/mri/) · [**Hetzner build page**](https://build.nebulytic.com/) · [**Individual renders**](docs/renders/README.md) · [**44 style concepts**](docs/design-studies/README.md) · [**Physics and receiver audit**](docs/PHYSICS.md)
+[**App website**](https://nebulytic.com/apps/resonance-mri/) · [**Privacy**](https://nebulytic.com/apps/resonance-mri/privacy) · [**Support**](https://nebulytic.com/apps/resonance-mri/support) · [**Try the earlier WebXR experience**](https://build.nebulytic.com/demos/mri/) · [**Hetzner build page**](https://build.nebulytic.com/) · [**Individual renders**](docs/renders/README.md) · [**44 style concepts**](docs/design-studies/README.md) · [**Physics and receiver audit**](docs/PHYSICS.md)
 
 The WebXR link is the earlier browser implementation with a different specimen and UI; this repository contains the native Unity project. The build page and [Quest 0.9.5 APK](https://build.nebulytic.com/dl/resonance-quest/Resonance-MRI-Quest-0.9.5.apk) / [Windows 0.9.4 ZIP](https://build.nebulytic.com/dl/resonance-quest/Resonance-MRI-Windows-0.9.4.zip) currently require the host's login. Public source access here requires no build-server account. The [GitHub 0.9.5 release](https://github.com/ajinkyagorad/Resonance-MRI/releases/tag/v0.9.5) includes the corrected release-signed Quest APK. The Windows package remains in the [0.9.4 release](https://github.com/ajinkyagorad/Resonance-MRI/releases/tag/v0.9.4).
 

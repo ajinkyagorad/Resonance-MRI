@@ -30,7 +30,7 @@ Install through a non-production Meta release channel and verify entitlement, la
 
 The trailer replays exact lesson timestamps and assembles the matching shipped voice clips. It is a server runtime capture, not a physical-headset recording. Generated [style studies](design-studies/README.md) are excluded from Store screenshots.
 
-Required notices are in [THIRD_PARTY.md](../THIRD_PARTY.md); the public [privacy policy](PRIVACY.md) describes the implementation and planned Store entitlement flow.
+Required notices are in [THIRD_PARTY.md](../THIRD_PARTY.md); the public [privacy policy](https://nebulytic.com/apps/resonance-mri/privacy) describes the implementation and planned Store entitlement flow.
 
 Current official references, checked 25 September 2026:
 - [Meta asset design guidelines](https://developers.meta.com/horizon/resources/asset-guidelines/)
@@ -40,3 +40,7 @@ Current official references, checked 25 September 2026:
 ## Manifest correction
 
 Use the [0.9.5 Quest APK](https://github.com/ajinkyagorad/Resonance-MRI/releases/tag/v0.9.5) for further preparation. [Final APK manifest evidence](validation/0.9.5/apk-manifest.txt) records installLocation=0. Store media remains the actual 0.9.4 imagery because runtime content is unchanged.
+
+## Public website
+
+The [app page](https://nebulytic.com/apps/resonance-mri/), [privacy policy](https://nebulytic.com/apps/resonance-mri/privacy), [support](https://nebulytic.com/apps/resonance-mri/support) and [licences](https://nebulytic.com/apps/resonance-mri/terms) are maintained in the Nebulytic website repository and published through its GitHub-to-Cloudflare workflow. This repository remains the public Unity source and release archive.
