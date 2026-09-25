@@ -1,0 +1,12 @@
+00:00 Resonance MRI · Nebulytic
+00:18 The scanner
+01:20 From one spin to spatial encoding
+05:06 Resonance
+05:52 Signal
+07:12 Gradient
+08:04 Slice
+09:13 Readout
+10:15 Phase
+11:15 Image
+11:51 Volume
+12:24 Explore Resonance MRI

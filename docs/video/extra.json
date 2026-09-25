@@ -1,0 +1,14 @@
+[
+  {
+    "id": "intro",
+    "text": "Resonance MRI, by Nebulytic. Follow the magnetic field, hydrogen moments and received signal through a complete simulated scan. The motion is slowed for explanation. Numerical settings belong to this teaching model.",
+    "duration": 15.35,
+    "audio": "audio/intro.wav"
+  },
+  {
+    "id": "outro",
+    "text": "Explore Resonance MRI yourself in virtual or mixed reality, or on Windows. The project is free and open source. Scan this code for downloads, source code and Meta Quest release updates. Find the same link in the description.",
+    "duration": 15.925,
+    "audio": "audio/outro.wav"
+  }
+]

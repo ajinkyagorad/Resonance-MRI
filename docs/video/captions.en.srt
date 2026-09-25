@@ -1,0 +1,641 @@
+1
+00:00:01,000 --> 00:00:08,207
+Resonance MRI, by Nebulytic. Follow the magnetic
+field, hydrogen moments and received signal through
+
+2
+00:00:08,207 --> 00:00:15,269
+a complete simulated scan. The motion is slowed for
+explanation. Numerical settings belong to this
+
+3
+00:00:15,269 --> 00:00:16,350
+teaching model.
+
+4
+00:00:18,000 --> 00:00:25,875
+This teaching model uses a simulated hand to show
+how MRI turns magnetic resonance into an image.
+
+5
+00:00:26,075 --> 00:00:34,375
+These silver windings represent the main magnet.
+This model uses a steady current of 133 amperes.
+
+6
+00:00:34,575 --> 00:00:39,925
+Their field, B₀, runs along the bore at one tesla;
+these lines trace it.
+
+7
+00:00:40,125 --> 00:00:45,925
+These arrows give the directions: z, in violet, runs
+along the bore and the field.
+
+8
+00:00:46,125 --> 00:00:50,800
+y, in orange, points up; x, in cyan, points across
+the bore.
+
+9
+00:00:51,000 --> 00:00:57,200
+Inside the magnet sit three gradient coils; each
+makes the field change along one direction.
+
+10
+00:00:57,400 --> 00:01:02,825
+Each has its direction's colour: the x coils cyan, y
+orange, z violet.
+
+11
+00:01:03,025 --> 00:01:08,750
+The coral RF coil transmits; the smaller gold loop
+receives the tissue’s signal.
+
+12
+00:01:08,950 --> 00:01:14,900
+A cable carries the receive coil’s voltage into the
+sampling and filtering electronics.
+
+13
+00:01:15,100 --> 00:01:19,875
+A hand lies in the bore; the scanner will image it,
+slice by slice.
+
+14
+00:01:20,917 --> 00:01:26,092
+Start with one hydrogen nucleus: its spin gives it a
+magnetic moment.
+
+15
+00:01:26,292 --> 00:01:33,006
+This arrow shows the spin state’s expectation value;
+its transverse component precesses around the
+
+16
+00:01:33,006 --> 00:01:33,417
+field.
+
+17
+00:01:33,617 --> 00:01:39,317
+The local magnetic field sets the Larmor frequency;
+here we slow that precession.
+
+18
+00:01:39,517 --> 00:01:45,542
+A resonant transverse RF field rotates the spin
+state, changing the moment’s direction.
+
+19
+00:01:45,742 --> 00:01:51,717
+Now fill this three-dimensional grid with identical
+small samples of hydrogen spins.
+
+20
+00:01:51,917 --> 00:01:57,567
+Each sample sees the same ideal field and pulse, so
+all net moments tip together.
+
+21
+00:01:57,767 --> 00:02:04,724
+After excitation, longitudinal magnetization
+recovers through energy exchange with the molecular
+
+22
+00:02:04,724 --> 00:02:05,667
+surroundings.
+
+23
+00:02:05,867 --> 00:02:12,817
+T one is the time to recover about sixty-three
+percent of the missing longitudinal magnetization.
+
+24
+00:02:13,017 --> 00:02:20,267
+Transverse coherence also decays: T two leaves about
+thirty-seven percent after one time constant.
+
+25
+00:02:20,467 --> 00:02:26,217
+Now two materials have different relaxation times
+and local frequency offsets.
+
+26
+00:02:26,417 --> 00:02:33,026
+Molecular motion and fluctuating magnetic
+interactions influence relaxation; shielding and
+
+27
+00:02:33,026 --> 00:02:35,817
+susceptibility affect local resonance.
+
+28
+00:02:36,017 --> 00:02:42,926
+Electrical permittivity influences RF-field
+distribution; it alone does not determine these
+
+29
+00:02:42,926 --> 00:02:44,217
+relaxation times.
+
+30
+00:02:44,417 --> 00:02:51,192
+During RF excitation, G z makes resonance frequency
+vary with z across this volume.
+
+31
+00:02:51,392 --> 00:02:57,392
+The RF frequency band excites a slab; these outer
+moments remain longitudinal.
+
+32
+00:02:57,592 --> 00:03:03,617
+During readout, G x makes precession frequency vary
+with x throughout the excited slice.
+
+33
+00:03:03,817 --> 00:03:10,257
+Positions sharing x contribute at the same
+frequency, so this measurement alone combines their
+
+34
+00:03:10,257 --> 00:03:11,217
+contributions.
+
+35
+00:03:11,417 --> 00:03:16,842
+A brief G y pulse accumulates different phases at
+different y positions.
+
+36
+00:03:17,042 --> 00:03:23,517
+When G y ends, its frequency shift ends, while the
+accumulated phase differences remain.
+
+37
+00:03:23,717 --> 00:03:28,817
+Follow these two samples: they share x but occupy
+different y positions.
+
+38
+00:03:29,017 --> 00:03:35,542
+Their first measurement adds both contributions:
+point eight plus point three gives one point one.
+
+39
+00:03:35,742 --> 00:03:42,367
+A second phase encoding makes their relative phase
+half a turn; their contributions now subtract.
+
+40
+00:03:42,567 --> 00:03:48,754
+Combining those two measurements recovers each
+contribution; many y positions require more
+
+41
+00:03:48,754 --> 00:03:50,267
+independent encodings.
+
+42
+00:03:50,467 --> 00:03:57,349
+Each k-space sample combines the excited slice; a
+complete set reconstructs the spatial voxel
+
+43
+00:03:57,349 --> 00:03:57,867
+values.
+
+44
+00:03:58,067 --> 00:04:03,742
+This small white box marks a block of the hand, five
+by five by ten millimetres.
+
+45
+00:04:03,942 --> 00:04:09,617
+Here that hand sample fills the grid; Sync can match
+its orientation to the scanner.
+
+46
+00:04:09,817 --> 00:04:16,017
+Use Sync to match the hand’s orientation, or unlock
+it and turn the tissue independently.
+
+47
+00:04:16,217 --> 00:04:21,492
+This three-dimensional grid has six by six by eight
+sampled tissue moments.
+
+48
+00:04:21,692 --> 00:04:27,042
+Each arrow initially shows the net magnetization of
+a small tissue sample.
+
+49
+00:04:27,242 --> 00:04:33,467
+The M control switches between net magnetization and
+an illustrative microscopic moment.
+
+50
+00:04:33,667 --> 00:04:37,817
+The Phase control colours the moments by their
+transverse phase.
+
+51
+00:04:38,017 --> 00:04:43,467
+The arrows change direction and length as the
+sample’s magnetization changes.
+
+52
+00:04:43,667 --> 00:04:47,692
+Select a moment to follow that sample in the
+enlarged views.
+
+53
+00:04:47,892 --> 00:04:53,092
+This circle carries the colours: each colour is one
+direction across the field.
+
+54
+00:04:53,292 --> 00:04:57,892
+This plot will show each coil's current against
+time: the pulse sequence.
+
+55
+00:04:58,092 --> 00:05:02,067
+This plot will show the signal measured by the
+receive loop.
+
+56
+00:05:02,267 --> 00:05:05,917
+And here the measurements will collect and become an
+image.
+
+57
+00:05:06,917 --> 00:05:13,067
+In this field, protons precess at 42.6 megahertz:
+the Larmor frequency.
+
+58
+00:05:13,267 --> 00:05:17,817
+Their turning is shown slowed here, to one turn
+every two seconds.
+
+59
+00:05:18,017 --> 00:05:23,992
+Now the RF coil's current makes a weak field, B₁,
+turning at that same frequency.
+
+60
+00:05:24,217 --> 00:05:27,742
+These coral arrows show B₁ filling the whole coil.
+
+61
+00:05:28,417 --> 00:05:33,667
+The second view turns with that field, and time runs
+ten thousand times slower.
+
+62
+00:05:33,867 --> 00:05:39,517
+Near resonance, the rotating drive steadily tips the
+tissue’s net magnetization.
+
+63
+00:05:39,717 --> 00:05:45,467
+The tipping adds up, though this field is 85
+thousand times weaker than the magnet's.
+
+64
+00:05:45,667 --> 00:05:51,942
+Transverse magnetization is now strong, with
+matching phases across the excited tissue.
+
+65
+00:05:52,958 --> 00:05:58,883
+In the scanner, the tipped protons sweep round 42.6
+million times a second.
+
+66
+00:05:59,158 --> 00:06:03,808
+Changing magnetic flux induces a voltage in the
+receive loop.
+
+67
+00:06:04,008 --> 00:06:13,183
+This example receiver digitizes the radio-frequency
+voltage at 122.88 million samples per second.
+
+68
+00:06:13,383 --> 00:06:20,608
+A digital oscillator supplies sine and cosine
+references. Mixing shifts the signal toward
+baseband.
+
+69
+00:06:20,808 --> 00:06:27,683
+Filtering and decimation leave 32 thousand I and Q
+pairs per second in this example.
+
+70
+00:06:27,883 --> 00:06:34,958
+I and Q together describe the received signal,
+weighted by the coil sensitivity across the sample.
+
+71
+00:06:35,158 --> 00:06:39,458
+Its colour is its phase, the same colours as the
+protons.
+
+72
+00:06:39,658 --> 00:06:42,658
+Now time runs a hundred times faster.
+
+73
+00:06:42,858 --> 00:06:47,333
+Each pair joins this line in the signal plot, drawn
+against time.
+
+74
+00:06:47,533 --> 00:06:53,883
+The signal shrinks: across the hand the field
+differs by millionths, so protons drift apart.
+
+75
+00:06:54,083 --> 00:07:01,433
+Within each tissue sample, transverse coherence
+decays while longitudinal magnetization recovers.
+
+76
+00:07:01,633 --> 00:07:05,483
+Muscle's tipped part fades within tens of
+milliseconds.
+
+77
+00:07:05,683 --> 00:07:11,958
+Fat's fades more slowly, and fat's protons turn
+slightly slower, so their colour drifts.
+
+78
+00:07:13,358 --> 00:07:17,808
+After a pause, the protons are back along the field
+and tipped again.
+
+79
+00:07:18,008 --> 00:07:21,358
+These are the z gradient coils, in violet.
+
+80
+00:07:21,558 --> 00:07:25,608
+Their current appears in the pulse sequence, on the
+Gz row.
+
+81
+00:07:25,808 --> 00:07:30,858
+It makes the field grow along the bore: the lines
+brighten where it is stronger.
+
+82
+00:07:31,058 --> 00:07:35,383
+In the block, this violet arrow shows the field
+rising along z.
+
+83
+00:07:35,583 --> 00:07:40,783
+Each plane now precesses at its own frequency, so
+the colours twist along z.
+
+84
+00:07:40,983 --> 00:07:47,533
+When the gradient stops, its frequency shift ends.
+The accumulated phase differences remain.
+
+85
+00:07:47,733 --> 00:07:53,283
+With phases fanned out, the protons add up to almost
+nothing: the signal vanishes.
+
+86
+00:07:53,483 --> 00:07:56,483
+Reversing the current unwinds the twist.
+
+87
+00:07:59,083 --> 00:08:03,258
+The colours line up again, and the signal returns:
+an echo.
+
+88
+00:08:04,692 --> 00:08:08,592
+After another pause, the z coils carry current
+again.
+
+89
+00:08:08,792 --> 00:08:12,917
+Each plane's frequency now rises steadily along the
+bore.
+
+90
+00:08:13,117 --> 00:08:18,792
+With the z gradient active, this pulse’s centre
+frequency targets the middle plane.
+
+91
+00:08:19,992 --> 00:08:23,092
+Its field reaches the whole volume at once.
+
+92
+00:08:24,197 --> 00:08:31,147
+This pulse chiefly excites a 1500-hertz band, with a
+finite transition at the slice edges.
+
+93
+00:08:31,347 --> 00:08:36,997
+Farther off resonance, the pulse produces much less
+net tipping across the tissue.
+
+94
+00:08:41,693 --> 00:08:45,468
+The tipped protons form a slab 5 millimetres thick.
+
+95
+00:08:45,668 --> 00:08:51,818
+Its thickness is the pulse's bandwidth divided by
+how fast frequency changes along z.
+
+96
+00:08:52,018 --> 00:08:55,968
+Through the slab's thickness, their colours have
+drifted apart.
+
+97
+00:08:56,168 --> 00:09:02,943
+A reversed z-gradient lobe supplies the rephasing
+area needed after this slice-selective pulse.
+
+98
+00:09:13,583 --> 00:09:16,933
+These are the x gradient coils, in cyan.
+
+99
+00:09:21,383 --> 00:09:25,633
+A short reversed pulse first winds the slab's
+colours along x.
+
+100
+00:09:33,283 --> 00:09:37,133
+Then the current flips, and the receiver starts
+sampling.
+
+101
+00:09:37,333 --> 00:09:41,658
+The field now rises along x, as the cyan arrow
+shows.
+
+102
+00:09:41,858 --> 00:09:46,733
+So protons at each x precess at their own rate,
+unwinding the twist.
+
+103
+00:09:46,933 --> 00:09:54,258
+At the echo, the readout gradient refocuses its
+accumulated x phase, and the combined signal peaks.
+
+104
+00:09:54,458 --> 00:09:58,683
+Every sample is the sum over the whole slab at that
+instant.
+
+105
+00:09:58,883 --> 00:10:04,808
+Protons sharing an x but not a y turn alike, so this
+readout cannot separate them.
+
+106
+00:10:05,008 --> 00:10:09,733
+These samples fill one row of a table of
+measurements, called k-space.
+
+107
+00:10:09,933 --> 00:10:14,408
+Along the row, kx counts the turns of x twist at
+each sample.
+
+108
+00:10:15,817 --> 00:10:19,392
+After a pause, the same slab is excited again.
+
+109
+00:10:19,592 --> 00:10:24,042
+This time the y gradient coils, in orange, carry a
+pulse first.
+
+110
+00:10:24,242 --> 00:10:26,742
+The field now rises along y.
+
+111
+00:10:26,942 --> 00:10:31,567
+Protons higher up precess faster, and the colours
+twist along y.
+
+112
+00:10:31,767 --> 00:10:34,467
+When the current stops, the twist stays.
+
+113
+00:10:34,667 --> 00:10:40,667
+The gradient pulse area sets ky, a spatial frequency
+measured in cycles per metre.
+
+114
+00:10:40,867 --> 00:10:43,492
+The readout then runs as before.
+
+115
+00:10:55,767 --> 00:11:00,942
+Each sample now adds up the slab's protons with the
+y twist included.
+
+116
+00:11:09,967 --> 00:11:13,092
+These samples fill a different row of k-space.
+
+117
+00:11:15,000 --> 00:11:19,200
+The scanner repeats this, each time with a different
+y pulse.
+
+118
+00:11:19,400 --> 00:11:22,900
+Here each repetition is shown only at its echo.
+
+119
+00:11:23,100 --> 00:11:26,950
+More turns fill rows farther from the middle of
+k-space.
+
+120
+00:11:27,150 --> 00:11:31,600
+The image forms where the slab is, sharpening as
+rows arrive.
+
+121
+00:11:31,800 --> 00:11:36,675
+For each point, the samples are added again with
+that point's twists undone.
+
+122
+00:11:36,875 --> 00:11:43,882
+Combining the encodings estimates each voxel. Finite
+sampling sets the resolution and point-spread
+
+123
+00:11:43,882 --> 00:11:44,525
+function.
+
+124
+00:11:44,725 --> 00:11:50,100
+Rows with few turns carry the most signal; outer
+rows add the fine detail.
+
+125
+00:11:51,125 --> 00:11:55,900
+Shifting the RF frequency moves the matching plane
+along the bore.
+
+126
+00:11:56,100 --> 00:11:59,700
+Each slab is excited and measured the same way.
+
+127
+00:11:59,900 --> 00:12:05,450
+The complete stack covers the hand, with each slice
+added only after it is measured.
+
+128
+00:12:05,650 --> 00:12:10,275
+Its brightness comes from each tissue's protons and
+how fast they relax.
+
+129
+00:12:10,475 --> 00:12:17,125
+Cortical bone has very short-lived signal. Tendons
+also appear dark with the timing used here.
+
+130
+00:12:17,325 --> 00:12:23,575
+These measurements and images were calculated from
+the simulated anatomy and acquisition.
+
+131
+00:12:25,583 --> 00:12:32,613
+Explore Resonance MRI yourself in virtual or mixed
+reality, or on Windows. The project is free and
+
+132
+00:12:32,613 --> 00:12:39,787
+open source. Scan this code for downloads, source
+code and Meta Quest release updates. Find the same
+
+133
+00:12:39,787 --> 00:12:41,508
+link in the description.

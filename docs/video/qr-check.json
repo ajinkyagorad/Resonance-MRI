@@ -1,0 +1,31 @@
+{
+  "qr": [
+    "https://nebulytic.com/apps/resonance-mri/"
+  ],
+  "destination": [
+    {
+      "path": "",
+      "ua": "NebulyticPublicationChec",
+      "status": 200,
+      "url": "https://nebulytic.com/apps/resonance-mri/"
+    },
+    {
+      "path": "",
+      "ua": "Mozilla/5.0 (Windows NT ",
+      "status": 200,
+      "url": "https://nebulytic.com/apps/resonance-mri/"
+    },
+    {
+      "path": "index.html",
+      "ua": "NebulyticPublicationChec",
+      "status": 200,
+      "url": "https://nebulytic.com/apps/resonance-mri/"
+    },
+    {
+      "path": "index.html",
+      "ua": "Mozilla/5.0 (Windows NT ",
+      "status": 200,
+      "url": "https://nebulytic.com/apps/resonance-mri/"
+    }
+  ]
+}

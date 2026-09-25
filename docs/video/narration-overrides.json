@@ -1,0 +1,100 @@
+{
+  "items": [
+    {
+      "id": "1.1",
+      "text": "This teaching model uses a simulated hand to show how MRI turns magnetic resonance into an image.",
+      "duration": 7.875,
+      "audio": "audio/1.1.wav"
+    },
+    {
+      "id": "1.2",
+      "text": "These silver windings represent the main magnet. This model uses a steady current of 133 amperes.",
+      "duration": 8.3,
+      "audio": "audio/1.2.wav"
+    },
+    {
+      "id": "4.3",
+      "text": "This example receiver digitizes the radio-frequency voltage at 122.88 million samples per second.",
+      "duration": 9.175,
+      "audio": "audio/4.3.wav"
+    },
+    {
+      "id": "4.4",
+      "text": "A digital oscillator supplies sine and cosine references. Mixing shifts the signal toward baseband.",
+      "duration": 7.225,
+      "audio": "audio/4.4.wav"
+    },
+    {
+      "id": "4.5",
+      "text": "Filtering and decimation leave 32 thousand I and Q pairs per second in this example.",
+      "duration": 6.875,
+      "audio": "audio/4.5.wav"
+    },
+    {
+      "id": "4.6",
+      "text": "I and Q together describe the received signal, weighted by the coil sensitivity across the sample.",
+      "duration": 7.075,
+      "audio": "audio/4.6.wav"
+    },
+    {
+      "id": "4.11",
+      "text": "Within each tissue sample, transverse coherence decays while longitudinal magnetization recovers.",
+      "duration": 7.35,
+      "audio": "audio/4.11.wav"
+    },
+    {
+      "id": "5.7",
+      "text": "When the gradient stops, its frequency shift ends. The accumulated phase differences remain.",
+      "duration": 6.55,
+      "audio": "audio/5.7.wav"
+    },
+    {
+      "id": "6.5",
+      "text": "This pulse chiefly excites a 1500-hertz band, with a finite transition at the slice edges.",
+      "duration": 6.95,
+      "audio": "audio/6.5.wav"
+    },
+    {
+      "id": "6.6",
+      "text": "Farther off resonance, the pulse produces much less net tipping across the tissue.",
+      "duration": 5.65,
+      "audio": "audio/6.6.wav"
+    },
+    {
+      "id": "6.10",
+      "text": "A reversed z-gradient lobe supplies the rephasing area needed after this slice-selective pulse.",
+      "duration": 6.775,
+      "audio": "audio/6.10.wav"
+    },
+    {
+      "id": "7.6",
+      "text": "At the echo, the readout gradient refocuses its accumulated x phase, and the combined signal peaks.",
+      "duration": 7.325,
+      "audio": "audio/7.6.wav"
+    },
+    {
+      "id": "8.6",
+      "text": "The gradient pulse area sets ky, a spatial frequency measured in cycles per metre.",
+      "duration": 6.0,
+      "audio": "audio/8.6.wav"
+    },
+    {
+      "id": "9.6",
+      "text": "Combining the encodings estimates each voxel. Finite sampling sets the resolution and point-spread function.",
+      "duration": 7.65,
+      "audio": "audio/9.6.wav"
+    },
+    {
+      "id": "10.5",
+      "text": "Cortical bone has very short-lived signal. Tendons also appear dark with the timing used here.",
+      "duration": 6.65,
+      "audio": "audio/10.5.wav"
+    },
+    {
+      "id": "10.6",
+      "text": "These measurements and images were calculated from the simulated anatomy and acquisition.",
+      "duration": 6.25,
+      "audio": "audio/10.6.wav"
+    }
+  ]
+}
